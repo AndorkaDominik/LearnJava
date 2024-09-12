@@ -35,8 +35,9 @@ const Footer = () => {
         </div>
         <div className="footer-section">
           <h3>Contact Us</h3>
-          <a href='mailto:dominik.andorka@gmail.com'>Gmail</a><br />
-          <a href='https://github.com/AndorkaDominik'>Github</a>
+          <a href="https://andorkadominik.hu" target='_blank'>Creator</a><br />
+          <a href='mailto:dominik.andorka@gmail.com' target='_blank'>Gmail</a><br />
+          <a href='https://github.com/AndorkaDominik' target='_blank'>Github</a>
         </div>
         <div className="footer-section social-media">
           <h3>Follow Us</h3>

@@ -80,7 +80,6 @@ p {
 code {
   background: var(--color-extra);
   color: var(--white);
-  padding: 0.2rem 0.4rem;
   border-radius: 4px;
   font-family: 'Poppins', monospace;
 }
@@ -203,5 +202,10 @@ pre {
 
   .course-content {
     padding: 0.5rem;
+  }
+}
+@media (max-width: 300px) {
+  .course-content {
+    padding: 2px;
   }
 }

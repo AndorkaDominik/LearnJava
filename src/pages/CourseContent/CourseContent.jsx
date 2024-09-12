@@ -3,8 +3,40 @@ import "./CourseContent.css"
 import { FiClipboard } from "react-icons/fi";
 import { TiTick } from "react-icons/ti";
 
+
+// Prism-based themes
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { okaidia, tomorrow, coy } from 'react-syntax-highlighter/dist/esm/styles/prism';
+
+
 const CourseContent = ({courseData, module }) => {
   const [copiedIndex, setCopiedIndex] = useState(null);
+  const [fontSize, setFontSize] = useState('1rem');
+  const [lineHeight, setLineHeight] = useState('1.5rem');
+
+  const copyToClipboard = (text, index) => {
+    navigator.clipboard.writeText(text)
+      .then(() => {
+        setCopiedIndex(index);
+        setTimeout(() => setCopiedIndex(null), 2000); // Reset the icon after 2 seconds
+      })
+      .catch((err) => {
+        console.error("Failed to copy: ", err);
+      });
+  };
+
+  const updateSize = () => {
+    if (window.innerWidth < 400) {
+      setFontSize('0.7rem');
+      setLineHeight('.7rem');
+    } else if (window.innerWidth < 768) {
+      setFontSize('0.9rem');
+      setLineHeight('1rem');
+    } else {
+      setFontSize('1rem');
+      setLineHeight('1.5rem');
+    }
+  };
 
   useEffect(() => {
     // Function to update the localStorage
@@ -99,16 +131,12 @@ const CourseContent = ({courseData, module }) => {
     return () => clearInterval(intervalId);
     }, []);
 
-  const copyToClipboard = (text, index) => {
-    navigator.clipboard.writeText(text)
-      .then(() => {
-        setCopiedIndex(index);
-        setTimeout(() => setCopiedIndex(null), 2000); // Reset the icon after 2 seconds
-      })
-      .catch((err) => {
-        console.error("Failed to copy: ", err);
-      });
-  };
+  useEffect(() => {
+    updateSize();
+    window.addEventListener('resize', updateSize);
+    return () => window.removeEventListener('resize', updateSize);
+  }, []);
+
 
   return (
     <div className="course-content ">
@@ -132,17 +160,24 @@ const CourseContent = ({courseData, module }) => {
           case "example":
             return (
               <div key={index} className="example-container">
-              <pre key={index}>
-                <code>{item.code}</code>
-                <button
+              <SyntaxHighlighter 
+                language="java" 
+                style={okaidia} 
+                key={index} 
+                wrapLongLines 
+                className="pre"
+                customStyle={{ fontSize: fontSize, lineHeight: lineHeight }}
+              >
+                {item.code}
+                
+              </SyntaxHighlighter>
+              <button
                   className="copy-button"
                   onClick={() => copyToClipboard(item.code, index)}
                 >
                   {copiedIndex === index ? <TiTick /> : <FiClipboard />}
-                    {copiedIndex === index ? " Copied!" : " Copy Code"}
+                  {copiedIndex === index ? " Copied!" : " Copy Code"}
                 </button>
-              </pre>
-              
               </div>
             );
           default:

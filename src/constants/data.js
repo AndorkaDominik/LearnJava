@@ -1480,14 +1480,14 @@ public class BankAccount {
       type: "example",
       code: `import java.util.Scanner;
 
-  public class InputExample {
-    public static void main(String[] args) {
-      Scanner scanner = new Scanner(System.in);
-      System.out.print("Enter your name: ");
-      String name = scanner.nextLine();
-      System.out.println("Hello, " + name + "!");
-    }
-  }`,
+public class InputExample {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    System.out.print("Enter your name: ");
+    String name = scanner.nextLine();
+    System.out.println("Hello, " + name + "!");
+  }
+}`,
     },
     {
       type: "header",
@@ -1501,12 +1501,12 @@ public class BankAccount {
     {
       type: "example",
       code: `// Output example
-  public class OutputExample {
-    public static void main(String[] args) {
-      System.out.println("Hello, World!");
-      System.out.printf("Formatted output: %d%n", 42);
-    }
-  }`,
+public class OutputExample {
+  public static void main(String[] args) {
+    System.out.println("Hello, World!");
+    System.out.printf("Formatted output: %d%n", 42);
+  }
+}`,
     },
   ],
   module6: [
