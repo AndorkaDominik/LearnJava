@@ -5852,5 +5852,21 @@ public class JobPortal {
 }
 `,
     },
+    {
+      type: "header",
+      level: 3,
+      text: "Example Resume Format:",
+    },
+    {
+      type: "example",
+      code: `
+Name: John Doe
+Email: john.doe@example.com
+
+Experience:
+- Software Engineer at Tech Company A
+- Data Analyst at Data Company B
+      `,
+    }
   ],
 };
