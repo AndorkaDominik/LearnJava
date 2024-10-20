@@ -41,6 +41,18 @@
     margin-bottom: 0;
 }
 
+.course .module-link p:nth-child(2) {
+    display: flex;
+    align-items: center;
+    justify-self: center;
+    gap: 10px;
+    transition: gap 0.2s ease-in-out;
+}
+
+.course .module-link:hover p:nth-child(2) {
+    gap: 20px;
+}
+
 @media (max-width: 768px) {
     .course .module-link{
         flex-direction: column;

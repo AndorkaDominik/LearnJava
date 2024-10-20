@@ -33,8 +33,16 @@ const Course = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.5 }}
         >
-            <CourseContent courseData={courseData.preview} />
-
+            {/* <CourseContent courseData={courseData.preview} /> */}
+            
+            <div className="course-content">
+                <h1><span>Master Java:</span> A Comprehensive Guide for Developers</h1>
+                <h2>Course Overview</h2>
+                <p>This course is designed for developers who want to master Java. You will explore the fundamentals of Java, dive into advanced concepts, and learn how to build robust applications using Java. The course will cover how to leverage Java's features in real-world applications, and best practices for Java development.</p>
+                <h2>Prerequisites</h2>
+                <p>Basic to intermediate knowledge of programming concepts.</p>
+                <p>Familiarity with object-oriented programming principles.</p>
+                </div>
             <div className='module-container'>
                 <Link to="/Java/module1/" onClick={scrollToTop}>
                     <div className='module-link'>
