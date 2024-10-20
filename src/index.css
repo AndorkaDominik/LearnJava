@@ -104,6 +104,11 @@ pre {
   padding: 5px 15px;
   cursor: pointer;
   letter-spacing: .2px;
+  transition: background-color .2s linear;
+}
+
+.cta:hover{
+  background-color: #c55f00;
 }
 
 .cta-secondary{
@@ -118,7 +123,13 @@ pre {
   padding: 5px 15px;
   cursor: pointer;
   letter-spacing: .2px;
+  transition: background-color .2s linear;
 }
+
+.cta-secondary:hover{
+  background-color: #e2e2e2;
+}
+
 
 .separator{
   margin: 80px 0;
