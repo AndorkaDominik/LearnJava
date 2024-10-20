@@ -47,7 +47,11 @@ function App() {
         <Route path="/practise/project3" element={<CourseContent courseData={courseData.project3} module={"project3"} />} />
         <Route path="/practise/project4" element={<CourseContent courseData={courseData.project4} module={"project4"} />} />
         <Route path="/practise/project5" element={<CourseContent courseData={courseData.project5} module={"project5"} />} />
-
+        <Route path="/practise/project6" element={<CourseContent courseData={courseData.project6} module={"project6"} />} />
+        <Route path="/practise/project7" element={<CourseContent courseData={courseData.project7} module={"project7"} />} />
+        <Route path="/practise/project8" element={<CourseContent courseData={courseData.project8} module={"project8"} />} />
+        <Route path="/practise/project9" element={<CourseContent courseData={courseData.project9} module={"project9"} />} />
+        <Route path="/practise/project10" element={<CourseContent courseData={courseData.project10} module={"project10"} />} />
         <Route path="/learning/" element={<Learning />} />
         
         <Route path="/join/" element={<Join />} />

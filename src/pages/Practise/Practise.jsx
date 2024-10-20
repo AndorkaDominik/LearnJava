@@ -37,6 +37,8 @@ const Practise = () => {
             <h1>Practise Through <span>Projects</span></h1>
             <p>Engage with real-world Java programming by building practical projects that reinforce your understanding of core concepts. Below are a series of projects, each focusing on different aspects of Java development. Each project includes a brief description, followed by the core concepts and features you’ll work on. These projects are designed to progressively challenge your skills, ensuring a comprehensive learning experience.</p>
             </div>
+            <h2>Intermediate level:</h2>
+            <br />
             <div className='module-container'>
                 <Link to="/practise/project1/" onClick={scrollToTop}>
                     <div className='module-link'>
@@ -68,10 +70,45 @@ const Practise = () => {
                         <p>Start now <FaArrowRight /></p>
                     </div>
                 </Link>
-                <br />
+            </div>
+        
+        
+        <h2>Advanced level:</h2>
+        <br />
+        <div className='module-container'>
+                <Link to="/practise/project6/" onClick={scrollToTop}>
+                    <div className='module-link'>
+                        <p><strong>Project 6:</strong> Collections with Inventory</p>
+                        <p>Start now <FaArrowRight /></p>
+                    </div>
+                </Link>
+                <Link to="/practise/project7/" onClick={scrollToTop}>
+                    <div className='module-link'>
+                        <p><strong>Project 7:</strong> Online Exam System</p>
+                        <p>Start now <FaArrowRight /></p>
+                    </div>
+                </Link>
+                <Link to="/practise/project8/" onClick={scrollToTop}>
+                    <div className='module-link'>
+                        <p><strong>Project 8:</strong> Online Exam System</p>
+                        <p>Start now <FaArrowRight /></p>
+                    </div>
+                </Link>
+                <Link to="/practise/project9/" onClick={scrollToTop}>
+                    <div className='module-link'>
+                        <p><strong>Project 9:</strong> Fitness Tracker Application</p>
+                        <p>Start now <FaArrowRight /></p>
+                    </div>
+                </Link>
+                <Link to="/practise/project10/" onClick={scrollToTop}>
+                    <div className='module-link'>
+                        <p><strong>Project 10:</strong> Job Portal with Resume Parsing</p>
+                        <p>Start now <FaArrowRight /></p>
+                    </div>
+                </Link>
+                
             </div>
         </motion.div>
-        
     </div>
   )
 }

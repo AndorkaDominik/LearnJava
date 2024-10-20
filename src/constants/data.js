@@ -4709,4 +4709,1148 @@ public class InventoryManagementSystem {
 `,
     },
   ],
+  project6:[
+    {
+      type: 'margin'
+    },
+    {
+      type: "header",
+      level: 2,
+      text: "Project 6: Advanced Inventory Management System with User Authentication",
+    },
+    {
+      type: "point",
+      text: "Create a more advanced inventory management system where users can add, remove, view, and update products. The system should include user authentication and role-based access (admin and regular user). Data should be saved and loaded from a file.",
+    },
+    {
+      type: "example",
+      code: `import java.io.*;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+// User class for authentication
+class User {
+    private String username;
+    private String password;
+    private boolean isAdmin;
+
+    public User(String username, String password, boolean isAdmin) {
+        this.username = username;
+        this.password = password;
+        this.isAdmin = isAdmin;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public boolean authenticate(String password) {
+        return this.password.equals(password);
+    }
+}
+
+// Product class
+class Product implements Serializable {
+    private String name;
+    private int quantity;
+    private double price;
+
+    public Product(String name, int quantity, double price) {
+        this.name = name;
+        this.quantity = quantity;
+        this.price = price;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    @Override
+    public String toString() {
+        return "Product Name: " + name + ", Quantity: " + quantity + ", Price: $" + price;
+    }
+}
+
+// Inventory Management System
+public class AdvancedInventoryManagementSystem {
+    private static ArrayList<Product> inventory = new ArrayList<>();
+    private static ArrayList<User> users = new ArrayList<>();
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        loadInventory();
+        createDefaultUsers();
+
+        User loggedInUser = authenticateUser(scanner);
+        if (loggedInUser == null) {
+            System.out.println("Authentication failed. Exiting.");
+            return;
+        }
+
+        while (true) {
+            System.out.println("Advanced Inventory Management System");
+            System.out.println("1. Add Product");
+            System.out.println("2. View Products");
+            System.out.println("3. Remove Product");
+            System.out.println("4. Update Product");
+            System.out.println("5. Save & Exit");
+            System.out.print("Choose an option: ");
+            int option = scanner.nextInt();
+
+            switch (option) {
+                case 1:
+                    if (loggedInUser.isAdmin()) {
+                        addProduct(scanner);
+                    } else {
+                        System.out.println("Access denied. Only admins can add products.");
+                    }
+                    break;
+                case 2:
+                    viewProducts();
+                    break;
+                case 3:
+                    if (loggedInUser.isAdmin()) {
+                        removeProduct(scanner);
+                    } else {
+                        System.out.println("Access denied. Only admins can remove products.");
+                    }
+                    break;
+                case 4:
+                    if (loggedInUser.isAdmin()) {
+                        updateProduct(scanner);
+                    } else {
+                        System.out.println("Access denied. Only admins can update products.");
+                    }
+                    break;
+                case 5:
+                    saveInventory();
+                    System.out.println("Exiting and saving the system.");
+                    scanner.close();
+                    return;
+                default:
+                    System.out.println("Invalid option. Please try again.");
+            }
+        }
+    }
+
+    private static void createDefaultUsers() {
+        users.add(new User("admin", "admin123", true));
+        users.add(new User("user", "user123", false));
+    }
+
+    private static User authenticateUser(Scanner scanner) {
+        System.out.print("Enter username: ");
+        String username = scanner.next();
+        System.out.print("Enter password: ");
+        String password = scanner.next();
+
+        for (User user : users) {
+            if (user.getUsername().equals(username) && user.authenticate(password)) {
+                System.out.println("Authentication successful. Welcome, " + username);
+                return user;
+            }
+        }
+        return null;
+    }
+
+    private static void addProduct(Scanner scanner) {
+        System.out.print("Enter product name: ");
+        scanner.nextLine(); // Consume newline
+        String name = scanner.nextLine();
+        System.out.print("Enter quantity: ");
+        int quantity = scanner.nextInt();
+        System.out.print("Enter price: ");
+        double price = scanner.nextDouble();
+
+        inventory.add(new Product(name, quantity, price));
+        System.out.println("Product added successfully.");
+    }
+
+    private static void viewProducts() {
+        if (inventory.isEmpty()) {
+            System.out.println("No products in inventory.");
+        } else {
+            System.out.println("Inventory:");
+            for (Product product : inventory) {
+                System.out.println(product);
+            }
+        }
+    }
+
+    private static void removeProduct(Scanner scanner) {
+        System.out.print("Enter the name of the product to remove: ");
+        scanner.nextLine(); // Consume newline
+        String name = scanner.nextLine();
+
+        boolean removed = inventory.removeIf(product -> product.getName().equalsIgnoreCase(name));
+        if (removed) {
+            System.out.println("Product removed successfully.");
+        } else {
+            System.out.println("Product not found.");
+        }
+    }
+
+    private static void updateProduct(Scanner scanner) {
+        System.out.print("Enter the name of the product to update: ");
+        scanner.nextLine(); // Consume newline
+        String name = scanner.nextLine();
+
+        for (Product product : inventory) {
+            if (product.getName().equalsIgnoreCase(name)) {
+                System.out.print("Enter new quantity: ");
+                int quantity = scanner.nextInt();
+                System.out.print("Enter new price: ");
+                double price = scanner.nextDouble();
+
+                product.setQuantity(quantity);
+                product.setPrice(price);
+                System.out.println("Product updated successfully.");
+                return;
+            }
+        }
+        System.out.println("Product not found.");
+    }
+
+    private static void loadInventory() {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("inventory.dat"))) {
+            inventory = (ArrayList<Product>) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("No saved inventory found. Starting fresh.");
+        }
+    }
+
+    private static void saveInventory() {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("inventory.dat"))) {
+            oos.writeObject(inventory);
+        } catch (IOException e) {
+            System.out.println("Error saving inventory.");
+        }
+    }
+}
+`,
+    },
+  ],
+  project7:[
+    {
+      type: 'margin'
+    },
+    {
+      type: "header",
+      level: 2,
+      text: "Project 7: Online Exam System",
+    },
+    {
+      type: "point",
+      text: "Develop an online exam system where teachers can add questions, and students can take tests. The questions should be stored using JSON, and the system should support multithreading for exam timers. Testing should be done using JUnit.",
+    },
+    {
+      type: "example",
+      code: `import javax.swing.*;
+import java.awt.*;
+import java.io.*;
+import java.util.*;
+import java.util.List;
+import org.json.*;
+import java.util.concurrent.*;
+
+// Question class for managing questions
+class Question {
+    private String questionText;
+    private List<String> options;
+    private int correctOption;
+
+    public Question(String questionText, List<String> options, int correctOption) {
+        this.questionText = questionText;
+        this.options = options;
+        this.correctOption = correctOption;
+    }
+
+    public String getQuestionText() {
+        return questionText;
+    }
+
+    public List<String> getOptions() {
+        return options;
+    }
+
+    public int getCorrectOption() {
+        return correctOption;
+    }
+
+    public JSONObject toJSON() {
+        JSONObject json = new JSONObject();
+        json.put("questionText", questionText);
+        json.put("options", options);
+        json.put("correctOption", correctOption);
+        return json;
+    }
+
+    public static Question fromJSON(JSONObject json) {
+        String questionText = json.getString("questionText");
+        List<String> options = new ArrayList<>();
+        JSONArray optionsArray = json.getJSONArray("options");
+        for (int i = 0; i < optionsArray.length(); i++) {
+            options.add(optionsArray.getString(i));
+        }
+        int correctOption = json.getInt("correctOption");
+        return new Question(questionText, options, correctOption);
+    }
+}
+
+// ExamSystem class to manage the system
+public class OnlineExamSystem {
+    private static List<Question> questions = new ArrayList<>();
+    private static String questionFile = "questions.json";
+
+    public static void main(String[] args) {
+        loadQuestions();
+
+        JFrame frame = new JFrame("Online Exam System");
+        frame.setSize(400, 300);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JPanel panel = new JPanel();
+        frame.add(panel);
+        placeComponents(panel);
+        frame.setVisible(true);
+    }
+
+    private static void placeComponents(JPanel panel) {
+        panel.setLayout(null);
+
+        JLabel userLabel = new JLabel("Username:");
+        userLabel.setBounds(10, 20, 80, 25);
+        panel.add(userLabel);
+
+        JTextField userText = new JTextField(20);
+        userText.setBounds(100, 20, 165, 25);
+        panel.add(userText);
+
+        JButton teacherButton = new JButton("Teacher");
+        teacherButton.setBounds(10, 80, 150, 25);
+        panel.add(teacherButton);
+
+        JButton studentButton = new JButton("Student");
+        studentButton.setBounds(10, 110, 150, 25);
+        panel.add(studentButton);
+
+        teacherButton.addActionListener(e -> {
+            String username = userText.getText();
+            if (username.equalsIgnoreCase("teacher")) {
+                openTeacherPanel();
+            } else {
+                JOptionPane.showMessageDialog(null, "Access denied. Only teachers can add questions.");
+            }
+        });
+
+        studentButton.addActionListener(e -> {
+            String username = userText.getText();
+            if (username.equalsIgnoreCase("student")) {
+                openStudentPanel();
+            } else {
+                JOptionPane.showMessageDialog(null, "Access denied. Only students can take exams.");
+            }
+        });
+    }
+
+    // Teacher Panel to add questions
+    private static void openTeacherPanel() {
+        JFrame teacherFrame = new JFrame("Teacher - Add Questions");
+        teacherFrame.setSize(400, 300);
+        JPanel panel = new JPanel();
+        teacherFrame.add(panel);
+        panel.setLayout(new GridLayout(5, 2));
+
+        JTextField questionText = new JTextField();
+        panel.add(new JLabel("Question:"));
+        panel.add(questionText);
+
+        JTextField option1 = new JTextField();
+        panel.add(new JLabel("Option 1:"));
+        panel.add(option1);
+
+        JTextField option2 = new JTextField();
+        panel.add(new JLabel("Option 2:"));
+        panel.add(option2);
+
+        JTextField option3 = new JTextField();
+        panel.add(new JLabel("Option 3:"));
+        panel.add(option3);
+
+        JTextField correctOption = new JTextField();
+        panel.add(new JLabel("Correct Option (1/2/3):"));
+        panel.add(correctOption);
+
+        JButton addButton = new JButton("Add Question");
+        addButton.addActionListener(e -> {
+            String qText = questionText.getText();
+            List<String> options = Arrays.asList(option1.getText(), option2.getText(), option3.getText());
+            int correct = Integer.parseInt(correctOption.getText());
+
+            questions.add(new Question(qText, options, correct));
+            saveQuestions();
+            JOptionPane.showMessageDialog(null, "Question added successfully.");
+        });
+        panel.add(addButton);
+
+        teacherFrame.setVisible(true);
+    }
+
+    // Student Panel to take exams
+    private static void openStudentPanel() {
+        JFrame studentFrame = new JFrame("Student - Take Exam");
+        studentFrame.setSize(400, 300);
+        JPanel panel = new JPanel();
+        studentFrame.add(panel);
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+        for (Question question : questions) {
+            panel.add(new JLabel(question.getQuestionText()));
+
+            ButtonGroup group = new ButtonGroup();
+            for (String option : question.getOptions()) {
+                JRadioButton button = new JRadioButton(option);
+                group.add(button);
+                panel.add(button);
+            }
+        }
+
+        JButton submitButton = new JButton("Submit");
+        panel.add(submitButton);
+
+        // Timer with multithreading
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+        scheduler.schedule(() -> {
+            JOptionPane.showMessageDialog(null, "Time's up!");
+            studentFrame.dispose();
+        }, 5, TimeUnit.MINUTES);
+
+        submitButton.addActionListener(e -> {
+            JOptionPane.showMessageDialog(null, "Exam Submitted!");
+            studentFrame.dispose();
+            scheduler.shutdownNow();
+        });
+
+        studentFrame.setVisible(true);
+    }
+
+    // Load questions from JSON file
+    private static void loadQuestions() {
+        try (BufferedReader reader = new BufferedReader(new FileReader(questionFile))) {
+            StringBuilder jsonText = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                jsonText.append(line);
+            }
+            JSONArray jsonArray = new JSONArray(jsonText.toString());
+            for (int i = 0; i < jsonArray.length(); i++) {
+                questions.add(Question.fromJSON(jsonArray.getJSONObject(i)));
+            }
+        } catch (IOException e) {
+            System.out.println("Error loading questions: " + e.getMessage());
+        }
+    }
+
+    // Save questions to JSON file
+    private static void saveQuestions() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(questionFile))) {
+            JSONArray jsonArray = new JSONArray();
+            for (Question question : questions) {
+                jsonArray.put(question.toJSON());
+            }
+            writer.write(jsonArray.toString());
+        } catch (IOException e) {
+            System.out.println("Error saving questions: " + e.getMessage());
+        }
+    }
+}
+`,
+    },
+  ],
+  project8:[
+    {
+      type: 'margin'
+    },
+    {
+      type: "header",
+      level: 2,
+      text: "Project 8: Online Course Management System",
+    },
+    {
+      type: "point",
+      text: "Develop an online course management system where teachers can create courses, upload materials, assign quizzes or assignments, and track student progress. Students can view materials, complete quizzes, and see their progress.",
+    },
+    {
+      type: "example",
+      code: `import javax.swing.*;
+import java.awt.*;
+import java.io.*;
+import java.util.*;
+import org.json.*;
+import java.util.concurrent.*;
+
+class Course {
+    private String courseName;
+    private String courseMaterial;
+    private List<String> assignments;
+    private List<String> quizzes;
+
+    public Course(String courseName, String courseMaterial) {
+        this.courseName = courseName;
+        this.courseMaterial = courseMaterial;
+        this.assignments = new ArrayList<>();
+        this.quizzes = new ArrayList<>();
+    }
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public String getCourseMaterial() {
+        return courseMaterial;
+    }
+
+    public void addAssignment(String assignment) {
+        assignments.add(assignment);
+    }
+
+    public void addQuiz(String quiz) {
+        quizzes.add(quiz);
+    }
+
+    public List<String> getAssignments() {
+        return assignments;
+    }
+
+    public List<String> getQuizzes() {
+        return quizzes;
+    }
+
+    public JSONObject toJSON() {
+        JSONObject json = new JSONObject();
+        json.put("courseName", courseName);
+        json.put("courseMaterial", courseMaterial);
+        json.put("assignments", assignments);
+        json.put("quizzes", quizzes);
+        return json;
+    }
+
+    public static Course fromJSON(JSONObject json) {
+        String courseName = json.getString("courseName");
+        String courseMaterial = json.getString("courseMaterial");
+        Course course = new Course(courseName, courseMaterial);
+
+        JSONArray assignmentArray = json.getJSONArray("assignments");
+        for (int i = 0; i < assignmentArray.length(); i++) {
+            course.addAssignment(assignmentArray.getString(i));
+        }
+
+        JSONArray quizArray = json.getJSONArray("quizzes");
+        for (int i = 0; i < quizArray.length(); i++) {
+            course.addQuiz(quizArray.getString(i));
+        }
+
+        return course;
+    }
+}
+
+// Main class for Online Course Management
+public class OnlineCourseManagementSystem {
+    private static List<Course> courses = new ArrayList<>();
+    private static String coursesFile = "courses.json";
+
+    public static void main(String[] args) {
+        loadCourses();
+
+        JFrame frame = new JFrame("Online Course Management System");
+        frame.setSize(500, 400);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JPanel panel = new JPanel();
+        frame.add(panel);
+        placeComponents(panel);
+        frame.setVisible(true);
+    }
+
+    private static void placeComponents(JPanel panel) {
+        panel.setLayout(null);
+
+        JLabel userLabel = new JLabel("Username:");
+        userLabel.setBounds(10, 20, 80, 25);
+        panel.add(userLabel);
+
+        JTextField userText = new JTextField(20);
+        userText.setBounds(100, 20, 165, 25);
+        panel.add(userText);
+
+        JButton teacherButton = new JButton("Teacher");
+        teacherButton.setBounds(10, 80, 150, 25);
+        panel.add(teacherButton);
+
+        JButton studentButton = new JButton("Student");
+        studentButton.setBounds(10, 110, 150, 25);
+        panel.add(studentButton);
+
+        teacherButton.addActionListener(e -> {
+            String username = userText.getText();
+            if (username.equalsIgnoreCase("teacher")) {
+                openTeacherPanel();
+            } else {
+                JOptionPane.showMessageDialog(null, "Access denied. Only teachers can manage courses.");
+            }
+        });
+
+        studentButton.addActionListener(e -> {
+            String username = userText.getText();
+            if (username.equalsIgnoreCase("student")) {
+                openStudentPanel();
+            } else {
+                JOptionPane.showMessageDialog(null, "Access denied. Only students can view courses.");
+            }
+        });
+    }
+
+    // Teacher panel to create courses and upload materials
+    private static void openTeacherPanel() {
+        JFrame teacherFrame = new JFrame("Teacher - Manage Courses");
+        teacherFrame.setSize(400, 300);
+        JPanel panel = new JPanel();
+        teacherFrame.add(panel);
+        panel.setLayout(new GridLayout(5, 2));
+
+        JTextField courseNameField = new JTextField();
+        panel.add(new JLabel("Course Name:"));
+        panel.add(courseNameField);
+
+        JTextField courseMaterialField = new JTextField();
+        panel.add(new JLabel("Course Material:"));
+        panel.add(courseMaterialField);
+
+        JButton addCourseButton = new JButton("Add Course");
+        addCourseButton.addActionListener(e -> {
+            String courseName = courseNameField.getText();
+            String courseMaterial = courseMaterialField.getText();
+
+            Course course = new Course(courseName, courseMaterial);
+            courses.add(course);
+            saveCourses();
+            JOptionPane.showMessageDialog(null, "Course added successfully.");
+        });
+        panel.add(addCourseButton);
+
+        JButton manageCoursesButton = new JButton("Manage Courses");
+        manageCoursesButton.addActionListener(e -> openManageCoursesPanel());
+        panel.add(manageCoursesButton);
+
+        teacherFrame.setVisible(true);
+    }
+
+    // Manage existing courses (assignments and quizzes)
+    private static void openManageCoursesPanel() {
+        JFrame manageFrame = new JFrame("Teacher - Manage Existing Courses");
+        manageFrame.setSize(400, 300);
+        JPanel panel = new JPanel();
+        manageFrame.add(panel);
+        panel.setLayout(new GridLayout(4, 2));
+
+        JComboBox<String> courseComboBox = new JComboBox<>();
+        for (Course course : courses) {
+            courseComboBox.addItem(course.getCourseName());
+        }
+        panel.add(new JLabel("Select Course:"));
+        panel.add(courseComboBox);
+
+        JTextField assignmentField = new JTextField();
+        panel.add(new JLabel("New Assignment:"));
+        panel.add(assignmentField);
+
+        JButton addAssignmentButton = new JButton("Add Assignment");
+        addAssignmentButton.addActionListener(e -> {
+            String selectedCourseName = (String) courseComboBox.getSelectedItem();
+            String assignment = assignmentField.getText();
+            courses.stream()
+                    .filter(c -> c.getCourseName().equals(selectedCourseName))
+                    .findFirst()
+                    .ifPresent(c -> c.addAssignment(assignment));
+            saveCourses();
+            JOptionPane.showMessageDialog(null, "Assignment added successfully.");
+        });
+        panel.add(addAssignmentButton);
+
+        JTextField quizField = new JTextField();
+        panel.add(new JLabel("New Quiz:"));
+        panel.add(quizField);
+
+        JButton addQuizButton = new JButton("Add Quiz");
+        addQuizButton.addActionListener(e -> {
+            String selectedCourseName = (String) courseComboBox.getSelectedItem();
+            String quiz = quizField.getText();
+            courses.stream()
+                    .filter(c -> c.getCourseName().equals(selectedCourseName))
+                    .findFirst()
+                    .ifPresent(c -> c.addQuiz(quiz));
+            saveCourses();
+            JOptionPane.showMessageDialog(null, "Quiz added successfully.");
+        });
+        panel.add(addQuizButton);
+
+        manageFrame.setVisible(true);
+    }
+
+    // Student panel to view courses and track progress
+    private static void openStudentPanel() {
+        JFrame studentFrame = new JFrame("Student - View Courses");
+        studentFrame.setSize(400, 300);
+        JPanel panel = new JPanel();
+        studentFrame.add(panel);
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+        for (Course course : courses) {
+            JLabel courseLabel = new JLabel("Course: " + course.getCourseName());
+            panel.add(courseLabel);
+
+            JLabel materialLabel = new JLabel("Material: " + course.getCourseMaterial());
+            panel.add(materialLabel);
+
+            JButton viewAssignmentsButton = new JButton("View Assignments");
+            panel.add(viewAssignmentsButton);
+            viewAssignmentsButton.addActionListener(e -> {
+                JOptionPane.showMessageDialog(null, "Assignments: " + course.getAssignments());
+            });
+
+            JButton viewQuizzesButton = new JButton("View Quizzes");
+            panel.add(viewQuizzesButton);
+            viewQuizzesButton.addActionListener(e -> {
+                JOptionPane.showMessageDialog(null, "Quizzes: " + course.getQuizzes());
+            });
+        }
+
+        studentFrame.setVisible(true);
+    }
+
+    // Load courses from JSON file
+    private static void loadCourses() {
+        try (BufferedReader reader = new BufferedReader(new FileReader(coursesFile))) {
+            StringBuilder jsonText = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                jsonText.append(line);
+            }
+            JSONArray jsonArray = new JSONArray(jsonText.toString());
+            for (int i = 0; i < jsonArray.length(); i++) {
+                courses.add(Course.fromJSON(jsonArray.getJSONObject(i)));
+            }
+        } catch (IOException e) {
+            System.out.println("Error loading courses: " + e.getMessage());
+        }
+    }
+
+    // Save courses to JSON file
+    private static void saveCourses() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(coursesFile))) {
+            JSONArray jsonArray = new JSONArray();
+            for (Course course : courses) {
+                jsonArray.put(course.to
+                jsonArray.put(course.toJSON());
+            }
+            writer.write(jsonArray.toString());
+        } catch (IOException e) {
+            System.out.println("Error saving courses: " + e.getMessage());
+        }
+    }
+}
+`,
+    },
+    {
+      type: "header",
+      level: 3,
+      text: "Example JSON Structure:",
+    },
+    {
+      type: "example",
+      code: `
+[
+    {
+        "courseName": "Introduction to Programming",
+        "courseMaterial": "ProgrammingBasics.pdf",
+        "assignments": ["Assignment 1", "Assignment 2"],
+        "quizzes": ["Quiz 1", "Quiz 2"]
+    },
+    {
+        "courseName": "Data Structures",
+        "courseMaterial": "DataStructures.pdf",
+        "assignments": ["Assignment 1"],
+        "quizzes": ["Quiz 1"]
+    }
+]
+
+      `,
+    }
+  ],
+  project9:[
+    {
+      type: 'margin'
+    },
+    {
+      type: "header",
+      level: 2,
+      text: "Project 9: Fitness Tracker Application",
+    },
+    {
+      type: "point",
+      text: "Develop a fitness tracker application that allows users to log their activities, set fitness goals, track health metrics, and receive exercise routine suggestions.",
+    },
+    {
+      type: "example",
+      code: `import javax.swing.*;
+import java.awt.*;
+import java.io.*;
+import java.util.*;
+import org.json.*;
+
+class User {
+    private String name;
+    private int age;
+    private double weight;
+    private double height;
+    private List<Activity> activities;
+
+    public User(String name, int age, double weight, double height) {
+        this.name = name;
+        this.age = age;
+        this.weight = weight;
+        this.height = height;
+        this.activities = new ArrayList<>();
+    }
+
+    public void addActivity(Activity activity) {
+        activities.add(activity);
+    }
+
+    public List<Activity> getActivities() {
+        return activities;
+    }
+
+    public JSONObject toJSON() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("age", age);
+        json.put("weight", weight);
+        json.put("height", height);
+        
+        JSONArray activityArray = new JSONArray();
+        for (Activity activity : activities) {
+            activityArray.put(activity.toJSON());
+        }
+        json.put("activities", activityArray);
+        return json;
+    }
+
+    public static User fromJSON(JSONObject json) {
+        String name = json.getString("name");
+        int age = json.getInt("age");
+        double weight = json.getDouble("weight");
+        double height = json.getDouble("height");
+        
+        User user = new User(name, age, weight, height);
+        JSONArray activityArray = json.getJSONArray("activities");
+        for (int i = 0; i < activityArray.length(); i++) {
+            user.addActivity(Activity.fromJSON(activityArray.getJSONObject(i)));
+        }
+        return user;
+    }
+}
+
+class Activity {
+    private String name;
+    private int duration; // in minutes
+    private int caloriesBurned;
+
+    public Activity(String name, int duration, int caloriesBurned) {
+        this.name = name;
+        this.duration = duration;
+        this.caloriesBurned = caloriesBurned;
+    }
+
+    public JSONObject toJSON() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("duration", duration);
+        json.put("caloriesBurned", caloriesBurned);
+        return json;
+    }
+
+    public static Activity fromJSON(JSONObject json) {
+        String name = json.getString("name");
+        int duration = json.getInt("duration");
+        int caloriesBurned = json.getInt("caloriesBurned");
+        return new Activity(name, duration, caloriesBurned);
+    }
+
+    @Override
+    public String toString() {
+        return name + " - Duration: " + duration + " mins, Calories Burned: " + caloriesBurned;
+    }
+}
+
+// Main class for Fitness Tracker Application
+public class FitnessTrackerApplication {
+    private static User user;
+    private static String userFile = "user.json";
+
+    public static void main(String[] args) {
+        loadUser();
+
+        JFrame frame = new JFrame("Fitness Tracker Application");
+        frame.setSize(500, 400);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JPanel panel = new JPanel();
+        frame.add(panel);
+        placeComponents(panel);
+        frame.setVisible(true);
+    }
+
+    private static void placeComponents(JPanel panel) {
+        panel.setLayout(null);
+
+        JLabel nameLabel = new JLabel("Name:");
+        nameLabel.setBounds(10, 20, 80, 25);
+        panel.add(nameLabel);
+
+        JTextField nameField = new JTextField(user.getName());
+        nameField.setBounds(100, 20, 165, 25);
+        panel.add(nameField);
+
+        JButton addActivityButton = new JButton("Add Activity");
+        addActivityButton.setBounds(10, 80, 150, 25);
+        panel.add(addActivityButton);
+
+        JButton viewActivitiesButton = new JButton("View Activities");
+        viewActivitiesButton.setBounds(10, 110, 150, 25);
+        panel.add(viewActivitiesButton);
+
+        addActivityButton.addActionListener(e -> {
+            String activityName = JOptionPane.showInputDialog("Enter activity name:");
+            int duration = Integer.parseInt(JOptionPane.showInputDialog("Enter duration in minutes:"));
+            int caloriesBurned = Integer.parseInt(JOptionPane.showInputDialog("Enter calories burned:"));
+
+            Activity activity = new Activity(activityName, duration, caloriesBurned);
+            user.addActivity(activity);
+            saveUser();
+            JOptionPane.showMessageDialog(null, "Activity added successfully.");
+        });
+
+        viewActivitiesButton.addActionListener(e -> {
+            StringBuilder activitiesList = new StringBuilder("Activities:\n");
+            for (Activity activity : user.getActivities()) {
+                activitiesList.append(activity).append("\\n");
+            }
+            JOptionPane.showMessageDialog(null, activitiesList.toString());
+        });
+    }
+
+    // Load user data from JSON file
+    private static void loadUser() {
+        try (BufferedReader reader = new BufferedReader(new FileReader(userFile))) {
+            StringBuilder jsonText = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                jsonText.append(line);
+            }
+            JSONObject json = new JSONObject(jsonText.toString());
+            user = User.fromJSON(json);
+        } catch (IOException e) {
+            System.out.println("Error loading user data: " + e.getMessage());
+            user = new User("Default User", 25, 70.0, 175.0); // Default user if not found
+        }
+    }
+
+    // Save user data to JSON file
+    private static void saveUser() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(userFile))) {
+            writer.write(user.toJSON().toString());
+        } catch (IOException e) {
+            System.out.println("Error saving user data: " + e.getMessage());
+        }
+    }
+}
+`,
+    },
+  ],
+  project10:[
+    {
+      type: 'margin'
+    },
+    {
+      type: "header",
+      level: 2,
+      text: "Project 10: Job Portal with Resume Parsing",
+    },
+    {
+      type: "point",
+      text: "Develop a job portal that enables job seekers to upload their resumes, which are then automatically parsed to extract relevant information and matched with job listings.",
+    },
+    {
+      type: "example",
+      code: `import javax.swing.*;
+import java.awt.*;
+import java.io.*;
+import java.util.*;
+import org.json.*;
+import java.util.regex.*;
+
+class JobListing {
+    private String title;
+    private String description;
+    private String company;
+    
+    public JobListing(String title, String description, String company) {
+        this.title = title;
+        this.description = description;
+        this.company = company;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public JSONObject toJSON() {
+        JSONObject json = new JSONObject();
+        json.put("title", title);
+        json.put("description", description);
+        json.put("company", company);
+        return json;
+    }
+
+    public static JobListing fromJSON(JSONObject json) {
+        return new JobListing(json.getString("title"), json.getString("description"), json.getString("company"));
+    }
+}
+
+class ResumeParser {
+    public static Map<String, String> parseResume(String resumeText) {
+        Map<String, String> parsedData = new HashMap<>();
+
+        // Example regex patterns for name and email
+        String namePattern = "Name: (.+)";
+        String emailPattern = "Email: (\\S+@\\S+\\.\\S+)";
+        
+        Matcher nameMatcher = Pattern.compile(namePattern).matcher(resumeText);
+        Matcher emailMatcher = Pattern.compile(emailPattern).matcher(resumeText);
+
+        if (nameMatcher.find()) {
+            parsedData.put("name", nameMatcher.group(1));
+        }
+        if (emailMatcher.find()) {
+            parsedData.put("email", emailMatcher.group(1));
+        }
+
+        return parsedData;
+    }
+}
+
+// Main class for Job Portal
+public class JobPortal {
+    private static List<JobListing> jobListings = new ArrayList<>();
+    private static String jobListingsFile = "job_listings.json";
+
+    public static void main(String[] args) {
+        loadJobListings();
+
+        JFrame frame = new JFrame("Job Portal");
+        frame.setSize(500, 400);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JPanel panel = new JPanel();
+        frame.add(panel);
+        placeComponents(panel);
+        frame.setVisible(true);
+    }
+
+    private static void placeComponents(JPanel panel) {
+        panel.setLayout(null);
+
+        JButton uploadResumeButton = new JButton("Upload Resume");
+        uploadResumeButton.setBounds(10, 20, 150, 25);
+        panel.add(uploadResumeButton);
+
+        JButton viewJobListingsButton = new JButton("View Job Listings");
+        viewJobListingsButton.setBounds(10, 60, 150, 25);
+        panel.add(viewJobListingsButton);
+
+        uploadResumeButton.addActionListener(e -> {
+            JFileChooser fileChooser = new JFileChooser();
+            int returnValue = fileChooser.showOpenDialog(null);
+            if (returnValue == JFileChooser.APPROVE_OPTION) {
+                File file = fileChooser.getSelectedFile();
+                String resumeText = readResumeFile(file);
+                Map<String, String> parsedData = ResumeParser.parseResume(resumeText);
+                JOptionPane.showMessageDialog(null, "Parsed Data: " + parsedData);
+            }
+        });
+
+        viewJobListingsButton.addActionListener(e -> {
+            StringBuilder jobListingsList = new StringBuilder("Job Listings:\n");
+            for (JobListing job : jobListings) {
+                jobListingsList.append(job.getTitle()).append(" at ").append(job.getCompany()).append("\\n");
+            }
+            JOptionPane.showMessageDialog(null, jobListingsList.toString());
+        });
+    }
+
+    // Load job listings from JSON file
+    private static void loadJobListings() {
+        try (BufferedReader reader = new BufferedReader(new FileReader(jobListingsFile))) {
+            StringBuilder jsonText = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                jsonText.append(line);
+            }
+            JSONArray jsonArray = new JSONArray(jsonText.toString());
+            for (int i = 0; i < jsonArray.length(); i++) {
+                jobListings.add(JobListing.fromJSON(jsonArray.getJSONObject(i)));
+            }
+        } catch (IOException e) {
+            System.out.println("Error loading job listings: " + e.getMessage());
+        }
+    }
+
+    // Read resume file and return its content as a string
+    private static String readResumeFile(File file) {
+        StringBuilder resumeText = new StringBuilder();
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                resumeText.append(line).append("\\n");
+            }
+        } catch (IOException e) {
+            System.out.println("Error reading resume file: " + e.getMessage());
+        }
+        return resumeText.toString();
+    }
+}
+`,
+    },
+  ],
 };
