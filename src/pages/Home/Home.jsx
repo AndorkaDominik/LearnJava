@@ -1,5 +1,5 @@
 // src/components/Home.js
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { FaPlus } from "react-icons/fa";
 import { motion } from 'framer-motion';
@@ -48,6 +48,11 @@ const needText = [
 ];
 
 const Home = () => {
+  const [isVisible, setIsVisible] = useState(true);
+
+  const handleClick = () => {
+    setIsVisible(!isVisible);
+  };
 
   const handleScroll = () => {
         window.scrollBy({ top: 550, behavior: 'smooth' });
@@ -158,10 +163,11 @@ const Home = () => {
           transition={{ duration: 0.8, delay: 1.4 }}
         >
           <div className='header'>
-            <div className='action-btn-container'>
+            <div className='action-btn-container' onClick={handleClick}>
               <div></div>
               <div></div>
               <div></div>
+              
             </div>
             <p><Typewriter
               words={['Hello.java','World.java' ]}
@@ -173,7 +179,10 @@ const Home = () => {
               delaySpeed={900}
             /></p>
           </div>
-          <img src={welcomeImg} alt="" draggable="false"/>
+          {isVisible && (
+          <img src={welcomeImg} alt="Welcome"
+          className={`welcomeImg ${!isVisible ? 'hidden' : ''}`} draggable="false"/>
+          )}
         </motion.div>
 
 
