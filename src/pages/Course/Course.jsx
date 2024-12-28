@@ -144,6 +144,80 @@ const Course = () => {
             </div>
         </motion.div>
         
+        <div className="SpringBoot">
+            <h1>Get a job with Java: <span>Spring Boot</span></h1>
+            <p>Learn how to build and deploy Spring Boot applications with ease.</p>
+            <br />
+            <div className="module-container">
+                <Link to="/Java/SpringBoot/module17" onClick={scrollToTop}>
+                    <div className='module-link'>
+                        <p><strong>Module 17:</strong> Introduction to Spring Boot</p>
+                        <p>Start now <FaArrowRight /></p>
+                    </div>
+                </Link>
+                <Link to="/Java/SpringBoot/module18" onClick={scrollToTop}>
+                    <div className='module-link'>
+                        <p><strong>Module 18:</strong> Set Up, Annotations & Configuration</p>
+                        <p>Start now <FaArrowRight /></p>
+                    </div>
+                </Link>
+                <Link to="/Java/SpringBoot/module19" onClick={scrollToTop}>
+                    <div className='module-link'>
+                        <p><strong>Module 19:</strong> Set Up, Annotations & Configuration</p>
+                        <p>Start now <FaArrowRight /></p>
+                    </div>
+                </Link>
+                <Link to="/Java/SpringBoot/module20" onClick={scrollToTop}>
+                    <div className='module-link'>
+                        <p><strong>Module 20:</strong> Creating RESTful APIs with Spring Boot</p>
+                        <p>Start now <FaArrowRight /></p>
+                    </div>
+                </Link>
+                <Link to="/Java/SpringBoot/module21" onClick={scrollToTop}>
+                    <div className='module-link'>
+                        <p><strong>Module 21:</strong> Set Up, Annotations & Configuration</p>
+                        <p>Start now <FaArrowRight /></p>
+                    </div>
+                </Link>
+                <Link to="/Java/SpringBoot/module22" onClick={scrollToTop}>
+                    <div className='module-link'>
+                        <p><strong>Module 22:</strong> Set Up, Annotations & Configuration</p>
+                        <p>Start now <FaArrowRight /></p>
+                    </div>
+                </Link>
+                <Link to="/Java/SpringBoot/module23" onClick={scrollToTop}>
+                    <div className='module-link'>
+                        <p><strong>Module 23:</strong> Set Up, Annotations & Configuration</p>
+                        <p>Start now <FaArrowRight /></p>
+                    </div>
+                </Link>
+                <Link to="/Java/SpringBoot/module24" onClick={scrollToTop}>
+                    <div className='module-link'>
+                        <p><strong>Module 24:</strong> Set Up, Annotations & Configuration</p>
+                        <p>Start now <FaArrowRight /></p>
+                    </div>
+                </Link>
+                <Link to="/Java/SpringBoot/module25" onClick={scrollToTop}>
+                    <div className='module-link'>
+                        <p><strong>Module 25:</strong> Set Up, Annotations & Configuration</p>
+                        <p>Start now <FaArrowRight /></p>
+                    </div>
+                </Link>
+                <Link to="/Java/SpringBoot/module26" onClick={scrollToTop}>
+                    <div className='module-link'>
+                        <p><strong>Module 26:</strong> Set Up, Annotations & Configuration</p>
+                        <p>Start now <FaArrowRight /></p>
+                    </div>
+                </Link>
+                <Link to="/Java/SpringBoot/module27" onClick={scrollToTop}>
+                    <div className='module-link'>
+                        <p><strong>Module 27:</strong> Set Up, Annotations & Configuration</p>
+                        <p>Start now <FaArrowRight /></p>
+                    </div>
+                </Link>
+            </div>
+
+        </div>
     </div>
   )
 }

@@ -84,6 +84,50 @@ const CourseContent = ({courseData, module }) => {
       }
     };
 
+    const updateCompletedSpringBoot = () => {
+      let completedSpringBoot;
+
+      try {
+        completedSpringBoot = JSON.parse(localStorage.getItem('completedSpringBoot'));
+      } catch (error) {
+        console.error("Error parsing completedSpringBoot from localStorage", error);
+        completedProjects = null;
+      }
+
+      // If 'completedSpringBoot' doesn't exist, initialize it
+      if (!completedSpringBoot) {
+        completedSpringBoot = {
+          "module1": false,
+          "module2": false,
+          "module3": false,
+          "module4": false,
+          "module5": false,
+          "module6": false,
+          "module7": false,
+          "module8": false,
+          "module9": false,
+          "module10": false,
+          "module11": false,
+          "module12": false,
+          "module13": false,
+          "module14": false,
+          "module15": false,
+          "module16": false,
+        };
+      }
+
+      // Set the current module to true
+      completedSpringBoot[module] = true;
+      // Update the completedSpringBoot in localStorage
+      localStorage.setItem('completedSpringBoot', JSON.stringify(completedSpringBoot));
+
+      try {
+        localStorage.setItem('completedSpringBoot', JSON.stringify(completedSpringBoot));
+      } catch (error) {
+        console.error("Error setting completedSpringBoot in localStorage", error);
+      }
+    };
+
     const updateCompletedProjects = () => {
       let completedProjects;
 
@@ -115,15 +159,51 @@ const CourseContent = ({courseData, module }) => {
       }
     };
 
+    const updateCompletedAdvancedProjects = () => {
+      let completedAdvancedProjects;
+
+      try {
+        completedAdvancedProjects = JSON.parse(localStorage.getItem('completedAdvancedProjects'));
+      } catch (error) {
+        console.error("Error parsing completedProjects from localStorage", error);
+        completedAdvancedProjects = null;
+      }
+
+      // If 'completedProjects' doesn't exist, initialize it
+      if (!completedAdvancedProjects) {
+        completedAdvancedProjects = {
+          "project6": false,
+          "project7": false,
+          "project8": false,
+          "project9": false,
+          "project10": false,
+        };
+      }
+
+      // Set the current module to true
+      completedAdvancedProjects[module] = true;
+      // Update the completedAdvancedProjects in localStorage
+      try {
+        localStorage.setItem('completedAdvancedProjects', JSON.stringify(completedAdvancedProjects));
+      } catch (error) {
+        console.error("Error setting completedAdvancedProjects in localStorage", error);
+      }
+    };
+
     // testing
     // Update immediately when component mounts
     // updateCompletedModules();
+    // updateCompletedSpringBoot();
     // updateCompletedProjects();
+    // updateCompletedAdvancedProjects();
+
 
     // Set up the interval to update every minute (60000 milliseconds)
     const intervalId = setInterval(() => {
       updateCompletedModules();
+      updateCompletedSpringBoot();
       updateCompletedProjects();
+      updateCompletedAdvancedProjects();
 
     }, 60000); // 60000 milliseconds = 1 minute
     

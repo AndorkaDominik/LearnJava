@@ -19,7 +19,7 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer-content">
-        <div className="footer-section">
+        <div className="footer-section" id='footer-logo'>
             <img src={logo} alt="" className='logo' width={180} />
             <h1>LearnJava</h1>
         </div>

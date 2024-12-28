@@ -2,7 +2,7 @@
 
 .footer {
     /* background: #1e2227; */
-    background: rgb(39, 40, 34);
+    background: rgb(8, 8, 7);
     color: #fff;
     padding: 2rem;
     text-align: center;
@@ -14,6 +14,16 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+}
+
+#footer-logo{
+    background-color: rgb(39, 39, 37);
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 3rem;
 }
 
 .footer-section {

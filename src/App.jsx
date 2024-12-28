@@ -40,6 +40,20 @@ function App() {
         <Route path="/Java/module14" element={<CourseContent courseData={courseData.module14} module={"module14"} />} />
         <Route path="/Java/module15" element={<CourseContent courseData={courseData.module15} module={"module15"} />} />
         <Route path="/Java/module16" element={<CourseContent courseData={courseData.module16} module={"module16"} />} />
+        
+        {/* SpringBoot */}
+        <Route path="/Java/SpringBoot/module17" element={<CourseContent courseData={courseData.module17} module={"module17"} />} />
+        <Route path="/Java/SpringBoot/module18" element={<CourseContent courseData={courseData.module18} module={"module18"} />} />
+        <Route path="/Java/SpringBoot/module19" element={<CourseContent courseData={courseData.module19} module={"module19"} />} />
+        <Route path="/Java/SpringBoot/module20" element={<CourseContent courseData={courseData.module20} module={"module20"} />} />
+        <Route path="/Java/SpringBoot/module21" element={<CourseContent courseData={courseData.module21} module={"module21"} />} />
+        <Route path="/Java/SpringBoot/module22" element={<CourseContent courseData={courseData.module22} module={"module22"} />} />
+        <Route path="/Java/SpringBoot/module23" element={<CourseContent courseData={courseData.module23} module={"module23"} />} />
+        <Route path="/Java/SpringBoot/module24" element={<CourseContent courseData={courseData.module24} module={"module24"} />} />
+        <Route path="/Java/SpringBoot/module25" element={<CourseContent courseData={courseData.module25} module={"module25"} />} />
+        <Route path="/Java/SpringBoot/module26" element={<CourseContent courseData={courseData.module26} module={"module26"} />} />
+        <Route path="/Java/SpringBoot/module27" element={<CourseContent courseData={courseData.module27} module={"module26"} />} />
+
 
         <Route path="/practise/" element={<Practise />} />
         <Route path="/practise/project1" element={<CourseContent courseData={courseData.project1} module={"project1"} />} />

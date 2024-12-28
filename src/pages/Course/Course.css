@@ -31,6 +31,10 @@
     border-radius: 10px;
 }
 
+.course .module-link:hover{
+    border: 1.2px solid var(--color-primary);
+}
+
 .course a{
     text-decoration: none;
     color: var(--txt-clr);
@@ -51,6 +55,7 @@
 
 .course .module-link:hover p:nth-child(2) {
     gap: 20px;
+    color: var(--color-primary);
 }
 
 @media (max-width: 768px) {

@@ -4277,6 +4277,2572 @@ git push origin feature-branch
     
   ],
 
+module17: [
+    {
+        type: 'margin'
+    },
+    {
+        type: "header",
+        level: 2,
+        text: "Module 17: Introduction to Spring Boot",
+    },
+    {
+        type: "header",
+        level: 3,
+        text: "Lesson 17.1: What is Spring Boot?",
+    },
+    {
+        type: "point",
+        text: "Spring Boot is an open-source Java-based framework used to create stand-alone, production-grade Spring applications quickly and easily.",
+    },
+    {
+        type: "point",
+        text: "Simplifies dependency management and configuration.",
+    },
+    {
+        type: "point",
+        text: "Uses embedded servers such as Tomcat or Jetty to run applications without requiring external servers.",
+    },
+    {
+        type: "example",
+        code: `// Hello World with Spring Boot
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@SpringBootApplication
+public class HelloWorldApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(HelloWorldApplication.class, args);
+    }
+}
+
+@RestController
+class HelloWorldController {
+    @GetMapping("/")
+    public String hello() {
+        return "Hello, Spring Boot!";
+    }
+}`,
+    },
+    {
+        type: "header",
+        level: 3,
+        text: "Lesson 17.2: Features of Spring Boot",
+    },
+    {
+        type: "point",
+        text: "Provides a wide range of features like auto-configuration, embedded servers, and production-ready tools.",
+    },
+    {
+        type: "point",
+        text: "Supports microservices architecture.",
+    },
+    {
+        type: "example",
+        code: `// Enabling Auto-Configuration
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class Application {
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
+}
+
+// Auto-configures components such as:
+// - DataSource for databases
+// - Message queues like RabbitMQ
+// - Embedded servers like Tomcat`,
+    },
+    {
+        type: "point",
+        text: "Production-ready features like health checks, metrics, and monitoring.",
+    },
+    {
+        type: "example",
+        code: `// Enabling Actuator for Monitoring
+import org.springframework.boot.actuate.autoconfigure.endpoint.web.WebEndpointProperties;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class MonitoringApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(MonitoringApplication.class, args);
+    }
+}
+
+// Use actuator endpoints like:
+// - /actuator/health
+// - /actuator/metrics`,
+    },
+    {
+        type: "header",
+        level: 3,
+        text: "Lesson 17.3: Setting Up Spring Boot",
+    },
+    {
+        type: "point",
+        text: "Install Java Development Kit (JDK) and Integrated Development Environment (IDE) like IntelliJ IDEA or Eclipse.",
+    },
+    {
+        type: "point",
+        text: "Use Spring Initializr to create a Spring Boot project with required dependencies.",
+    },
+    {
+        type: "example",
+        code: `// Steps to create a Spring Boot project using Spring Initializr:
+// 1. Visit https://start.spring.io/
+// 2. Choose "Maven Project" or "Gradle Project".
+// 3. Select Java as the language.
+// 4. Add dependencies (e.g., Spring Web, Spring Data JPA).
+// 5. Generate the project and import it into your IDE.`,
+    },
+    {
+        type: "point",
+        text: "Run the application using the embedded server with `SpringApplication.run()`.",
+    },
+    {
+        type: "example",
+        code: `// Running a Spring Boot Application
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class RunApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(RunApplication.class, args);
+    }
+}
+
+// Once the application starts, access it at:
+// http://localhost:8080`,
+    },
+    {
+        type: "header",
+        level: 3,
+        text: "Lesson 17.4: Understanding Dependencies in Spring Boot",
+    },
+    {
+        type: "point",
+        text: "Dependencies in Spring Boot are managed through Maven or Gradle build tools.",
+    },
+    {
+        type: "example",
+        code: `// Maven Dependencies for Spring Boot
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-jpa</artifactId>
+</dependency>
+
+// Gradle Dependencies for Spring Boot
+implementation 'org.springframework.boot:spring-boot-starter-web'
+implementation 'org.springframework.boot:spring-boot-starter-data-jpa'`,
+    },
+    {
+        type: "point",
+        text: "Spring Boot Starter dependencies simplify configuration and include all necessary libraries.",
+    },
+    {
+        type: "example",
+        code: `// Spring Boot Starter Web includes:
+// - Spring MVC
+// - Jackson JSON processing
+// - Embedded Tomcat
+
+// Just include one dependency:
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+</dependency>`,
+    },
+],
+
+module18: [
+  {
+    type: 'margin'
+  },
+  {
+    type: "header",
+    level: 2,
+    text: "Module 18: Setting Up a Spring Boot Project and Understanding Annotations & Configuration",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 18.1: Introduction to Spring Boot",
+  },
+  {
+    type: "point",
+    text: "Spring Boot simplifies the development of Java applications by providing default configurations and minimizing boilerplate code.",
+  },
+  {
+    type: "point",
+    text: "It integrates with the Spring Framework, offering embedded servers, auto-configuration, and a production-ready environment.",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 18.2: Setting Up a Spring Boot Project",
+  },
+  {
+    type: "point",
+    text: "You can create a Spring Boot project using Spring Initializr or manually through Maven or Gradle.",
+  },
+  {
+    type: "example",
+    code: `// Example: Using Spring Initializr
+// 1. Go to https://start.spring.io/
+// 2. Choose your project settings:
+//    - Project: Maven
+//    - Language: Java
+//    - Spring Boot Version: 3.x.x (latest stable)
+//    - Dependencies: Spring Web, Spring Data JPA, H2 Database
+// 3. Download the generated project.
+// 4. Open it in your favorite IDE (e.g., IntelliJ IDEA, Eclipse).
+`,
+  },
+  {
+    type: "point",
+    text: "To run the project, use the command `mvn spring-boot:run` or the IDE's built-in tools.",
+  },
+  {
+    type: "example",
+    code: `// Running a Spring Boot application
+// Navigate to the project directory and execute the following:
+mvn spring-boot:run
+
+// Alternatively, run the application using the main method in the generated Application class:
+public static void main(String[] args) {
+  SpringApplication.run(MyApplication.class, args);
+}`,
+  },
+  {
+    type: "point",
+    text: "Spring Boot projects are structured with default folders like `src/main/java`, `src/main/resources`, and `src/test` for a clear separation of code and resources.",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 18.3: Spring Boot Annotations and Configuration",
+  },
+  {
+    type: "point",
+    text: "Annotations in Spring Boot simplify the configuration process by reducing XML-based configuration.",
+  },
+  {
+    type: "point",
+    text: "@SpringBootApplication is a combination of three annotations: @Configuration, @EnableAutoConfiguration, and @ComponentScan.",
+  },
+  {
+    type: "example",
+    code: `// Example: @SpringBootApplication
+@SpringBootApplication
+public class MyApplication {
+  public static void main(String[] args) {
+    SpringApplication.run(MyApplication.class, args);
+  }
+}`,
+  },
+  {
+    type: "point",
+    text: "Other commonly used annotations include @Component, @Service, @Repository, and @Controller.",
+  },
+  {
+    type: "example",
+    code: `// Example: Using @Component
+@Component
+public class MyComponent {
+  public String sayHello() {
+    return "Hello from MyComponent!";
+  }
+}
+
+// Using @Controller for handling HTTP requests
+@Controller
+public class MyController {
+  @RequestMapping("/hello")
+  @ResponseBody
+  public String hello() {
+    return "Hello, World!";
+  }
+}`,
+  },
+  {
+    type: "point",
+    text: "Spring Boot uses application.properties or application.yml files for configuring application settings, such as server port and database connections.",
+  },
+  {
+    type: "example",
+    code: `# Example: application.properties
+server.port=8081
+spring.datasource.url=jdbc:h2:mem:testdb
+spring.datasource.driverClassName=org.h2.Driver
+spring.datasource.username=sa
+spring.datasource.password=password`,
+  },
+  {
+    type: "point",
+    text: "Profiles can be used to define environment-specific configurations. Use @Profile annotation to activate configurations for specific environments (e.g., dev, prod).",
+  },
+  {
+    type: "example",
+    code: `// Example: Using @Profile
+@Configuration
+@Profile("dev")
+public class DevConfig {
+  @Bean
+  public String devBean() {
+    return "Development Bean";
+  }
+}
+
+@Configuration
+@Profile("prod")
+public class ProdConfig {
+  @Bean
+  public String prodBean() {
+    return "Production Bean";
+  }
+}`,
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 18.4: Auto-Configuration",
+  },
+  {
+    type: "point",
+    text: "Spring Boot's @EnableAutoConfiguration enables automatic configuration based on the project's dependencies.",
+  },
+  {
+    type: "example",
+    code: `// Example: Auto-Configuration
+@SpringBootApplication
+public class MyApplication {
+  // Spring Boot will auto-configure a default DataSource bean
+  public static void main(String[] args) {
+    SpringApplication.run(MyApplication.class, args);
+  }
+}`,
+  },
+  {
+    type: "point",
+    text: "You can exclude unwanted auto-configurations using exclude or excludeName attributes.",
+  },
+  {
+    type: "example",
+    code: `// Example: Excluding auto-configuration
+@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
+public class MyApplication {
+  public static void main(String[] args) {
+    SpringApplication.run(MyApplication.class, args);
+  }
+}`,
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 18.5: Dependency Injection in Spring Boot",
+  },
+  {
+    type: "point",
+    text: "Dependency Injection (DI) is a core feature of the Spring Framework that simplifies object creation and dependency management.",
+  },
+  {
+    type: "point",
+    text: "Spring Boot uses annotations like @Autowired and @Qualifier to inject dependencies into beans.",
+  },
+  {
+    type: "example",
+    code: `// Example: @Autowired for Dependency Injection
+  @Component
+  public class GreetingService {
+    public String getGreeting() {
+      return "Hello, Dependency Injection!";
+    }
+  }
+
+  @RestController
+  public class GreetingController {
+    private final GreetingService greetingService;
+
+    @Autowired
+    public GreetingController(GreetingService greetingService) {
+      this.greetingService = greetingService;
+    }
+
+    @GetMapping("/greet")
+    public String greet() {
+      return greetingService.getGreeting();
+    }
+  }`,
+  },
+  {
+    type: "point",
+    text: "Use @Qualifier to specify which bean to inject when multiple beans of the same type exist.",
+  },
+  {
+    type: "example",
+    code: `// Example: Using @Qualifier
+  @Component("morningGreeting")
+  public class MorningGreetingService implements GreetingService {
+    public String getGreeting() {
+      return "Good morning!";
+    }
+  }
+
+  @Component("eveningGreeting")
+  public class EveningGreetingService implements GreetingService {
+    public String getGreeting() {
+      return "Good evening!";
+    }
+  }
+
+  @RestController
+  public class GreetingController {
+    private final GreetingService greetingService;
+
+    @Autowired
+    public GreetingController(@Qualifier("morningGreeting") GreetingService greetingService) {
+      this.greetingService = greetingService;
+    }
+
+    @GetMapping("/greet")
+    public String greet() {
+      return greetingService.getGreeting();
+    }
+  }`,
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 18.6: Monitoring and Actuators",
+  },
+  {
+    type: "point",
+    text: "Spring Boot Actuator provides production-ready features to monitor and manage your application.",
+  },
+  {
+    type: "point",
+    text: "Add the `spring-boot-starter-actuator` dependency to enable Actuator endpoints.",
+  },
+  {
+    type: "example",
+    code: `// Example: Adding Actuator to your project
+  <dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-actuator</artifactId>
+  </dependency>`,
+  },
+  {
+    type: "point",
+    text: "By default, Actuator enables several endpoints such as /actuator/health, /actuator/metrics, and /actuator/info.",
+  },
+  {
+    type: "example",
+    code: `# Example: application.properties for Actuator
+  management.endpoints.web.exposure.include=health,info,metrics
+
+  # Customizing the /info endpoint
+  info.app.name=My Spring Boot App
+  info.app.version=1.0.0
+  info.app.description=An example of using Spring Boot Actuator`,
+  },
+  {
+    type: "point",
+    text: "Use tools like Prometheus and Grafana for advanced monitoring and visualization by integrating with Actuator's metrics endpoints.",
+  },
+  {
+    type: "example",
+    code: `// Example: Accessing Actuator Endpoints
+  // After running the application, visit the following URLs:
+  // - Health: http://localhost:8080/actuator/health
+  // - Metrics: http://localhost:8080/actuator/metrics
+  // - Info: http://localhost:8080/actuator/info`,
+  },
+
+],
+
+module19: [
+  {
+    type: "margin",
+  },
+  {
+    type: "header",
+    level: 2,
+    text: "Module 19: Dependency Injection and Spring Context",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 19.1: What is Dependency Injection (DI)?",
+  },
+  {
+    type: "point",
+    text: "Dependency Injection (DI) is a design pattern that allows objects to be loosely coupled by providing their dependencies from an external source rather than the object creating them itself.",
+  },
+  {
+    type: "point",
+    text: "Spring uses DI to manage the lifecycle and configuration of objects, simplifying application development.",
+  },
+  {
+    type: "example",
+    code: `// Without Dependency Injection
+public class UserService {
+  private UserRepository userRepository = new UserRepository(); // tightly coupled
+}
+
+// With Dependency Injection
+public class UserService {
+  private UserRepository userRepository;
+  
+  // Dependency injected via constructor
+  public UserService(UserRepository userRepository) {
+    this.userRepository = userRepository;
+  }
+}`,
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 19.2: Types of Dependency Injection in Spring",
+  },
+  {
+    type: "point",
+    text: "Spring supports three types of dependency injection: Constructor Injection, Setter Injection, and Field Injection.",
+  },
+  {
+    type: "point",
+    text: "Constructor Injection: Dependencies are injected through the constructor of the class.",
+  },
+  {
+    type: "example",
+    code: `// Example: Constructor Injection
+@Component
+public class UserService {
+  private final UserRepository userRepository;
+  
+  @Autowired
+  public UserService(UserRepository userRepository) {
+    this.userRepository = userRepository;
+  }
+}`,
+  },
+  {
+    type: "point",
+    text: "Setter Injection: Dependencies are injected through a setter method.",
+  },
+  {
+    type: "example",
+    code: `// Example: Setter Injection
+@Component
+public class UserService {
+  private UserRepository userRepository;
+  
+  @Autowired
+  public void setUserRepository(UserRepository userRepository) {
+    this.userRepository = userRepository;
+  }
+}`,
+  },
+  {
+    type: "point",
+    text: "Field Injection: Dependencies are injected directly into the fields using the @Autowired annotation.",
+  },
+  {
+    type: "example",
+    code: `// Example: Field Injection
+@Component
+public class UserService {
+  @Autowired
+  private UserRepository userRepository;
+}`,
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 19.3: Spring Context",
+  },
+  {
+    type: "point",
+    text: "The Spring Context is the central interface for accessing the Spring container, which manages the lifecycle of beans and their dependencies.",
+  },
+  {
+    type: "point",
+    text: "ApplicationContext is a subinterface of the BeanFactory, providing more advanced container capabilities like event propagation and AOP integration.",
+  },
+  {
+    type: "example",
+    code: `// Example: Using ApplicationContext
+@SpringBootApplication
+public class MyApplication {
+  public static void main(String[] args) {
+    ApplicationContext context = SpringApplication.run(MyApplication.class, args);
+    
+    // Accessing a bean from the context
+    UserService userService = context.getBean(UserService.class);
+    System.out.println(userService.getUserDetails());
+  }
+}`,
+  },
+  {
+    type: "point",
+    text: "Beans in the Spring Context can be defined through annotations (@Component, @Service, @Repository) or XML configuration.",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 19.4: Bean Scopes in Spring",
+  },
+  {
+    type: "point",
+    text: "Spring supports different bean scopes to define the lifecycle of a bean within the application context.",
+  },
+  {
+    type: "point",
+    text: "Common scopes include: singleton (default), prototype, request, session, and application.",
+  },
+  {
+    type: "example",
+    code: `// Example: Defining Bean Scope
+@Component
+@Scope("prototype")
+public class PrototypeBean {
+  public String getMessage() {
+    return "This is a prototype-scoped bean!";
+  }
+}`,
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 19.5: @Autowired and @Qualifier",
+  },
+  {
+    type: "point",
+    text: "The @Autowired annotation is used for automatic dependency injection by type.",
+  },
+  {
+    type: "point",
+    text: "The @Qualifier annotation is used to resolve conflicts when multiple beans of the same type are available.",
+  },
+  {
+    type: "example",
+    code: `// Example: Using @Autowired and @Qualifier
+@Component
+public class MyService {
+  @Autowired
+  @Qualifier("specificBean")
+  private MyBean myBean;
+}`,
+  },
+],
+
+module20: [
+  {
+    type: "margin",
+  },
+  {
+    type: "header",
+    level: 2,
+    text: "Module 20: Creating RESTful APIs with Spring Boot",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 20.1: Understanding RESTful APIs",
+  },
+  {
+    type: "point",
+    text: "REST (Representational State Transfer) is an architectural style for designing networked applications.",
+  },
+  {
+    type: "point",
+    text: "A RESTful API uses HTTP methods like GET, POST, PUT, and DELETE to perform CRUD operations on resources.",
+  },
+  {
+    type: "point",
+    text: "Spring Boot simplifies the creation of RESTful APIs with annotations and built-in support for HTTP handling.",
+  },
+  {
+    type: "example",
+    code: `// Basic REST Controller
+@RestController
+@RequestMapping("/api")
+public class HelloController {
+  
+  @GetMapping("/hello")
+  public String sayHello() {
+    return "Hello, World!";
+  }
+}`,
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 20.2: Creating a RESTful API",
+  },
+  {
+    type: "point",
+    text: "Use the @RestController annotation to mark a class as a REST controller.",
+  },
+  {
+    type: "point",
+    text: "Define endpoints using @RequestMapping and HTTP method-specific annotations like @GetMapping, @PostMapping, @PutMapping, and @DeleteMapping.",
+  },
+  {
+    type: "example",
+    code: `// Example: CRUD operations for a User resource
+@RestController
+@RequestMapping("/api/users")
+public class UserController {
+  
+  private List<User> users = new ArrayList<>();
+
+  @GetMapping
+  public List<User> getAllUsers() {
+    return users;
+  }
+
+  @PostMapping
+  public User createUser(@RequestBody User user) {
+    users.add(user);
+    return user;
+  }
+
+  @PutMapping("/{id}")
+  public User updateUser(@PathVariable int id, @RequestBody User updatedUser) {
+    users.set(id, updatedUser);
+    return updatedUser;
+  }
+
+  @DeleteMapping("/{id}")
+  public String deleteUser(@PathVariable int id) {
+    users.remove(id);
+    return "User deleted successfully!";
+  }
+}`,
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 20.3: Handling Path Variables and Query Parameters",
+  },
+  {
+    type: "point",
+    text: "Use @PathVariable to capture dynamic values from the URL path.",
+  },
+  {
+    type: "point",
+    text: "Use @RequestParam to handle query parameters passed in the URL.",
+  },
+  {
+    type: "example",
+    code: `// Example: Handling Path Variables and Query Parameters
+@RestController
+@RequestMapping("/api/greetings")
+public class GreetingController {
+
+  @GetMapping("/{name}")
+  public String greet(@PathVariable String name, @RequestParam(required = false, defaultValue = "Hello") String prefix) {
+    return prefix + ", " + name + "!";
+  }
+}`,
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 20.4: Returning JSON Responses",
+  },
+  {
+    type: "point",
+    text: "Spring Boot automatically converts Java objects to JSON using the Jackson library.",
+  },
+  {
+    type: "example",
+    code: `// Example: Returning JSON Response
+@RestController
+@RequestMapping("/api/users")
+public class UserController {
+
+  @GetMapping("/{id}")
+  public User getUser(@PathVariable int id) {
+    return new User(id, "John Doe", "john.doe@example.com");
+  }
+}
+
+// User model
+public class User {
+  private int id;
+  private String name;
+  private String email;
+
+  // Constructor, Getters, and Setters
+}`,
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 20.5: Exception Handling in REST APIs",
+  },
+  {
+    type: "point",
+    text: "Use @ExceptionHandler to handle specific exceptions in a controller.",
+  },
+  {
+    type: "point",
+    text: "Create a global exception handler using @ControllerAdvice to handle exceptions across all controllers.",
+  },
+  {
+    type: "example",
+    code: `// Example: Global Exception Handling
+@ControllerAdvice
+public class GlobalExceptionHandler {
+
+  @ExceptionHandler(ResourceNotFoundException.class)
+  public ResponseEntity<String> handleResourceNotFound(ResourceNotFoundException ex) {
+    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+  }
+}
+
+// Custom exception
+public class ResourceNotFoundException extends RuntimeException {
+  public ResourceNotFoundException(String message) {
+    super(message);
+  }
+}`,
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 20.6: Testing RESTful APIs",
+  },
+  {
+    type: "point",
+    text: "Use tools like Postman or curl to manually test your APIs.",
+  },
+  {
+    type: "point",
+    text: "Automate API testing using JUnit and Spring Boot's MockMvc framework.",
+  },
+  {
+    type: "example",
+    code: `// Example: Testing with MockMvc
+@SpringBootTest
+@AutoConfigureMockMvc
+public class UserControllerTest {
+
+  @Autowired
+  private MockMvc mockMvc;
+
+  @Test
+  public void testGetAllUsers() throws Exception {
+    mockMvc.perform(get("/api/users"))
+      .andExpect(status().isOk())
+      .andExpect(jsonPath("$").isArray());
+  }
+}`,
+  },
+],
+
+module21: [
+  {
+    type: "margin",
+  },
+  {
+    type: "header",
+    level: 2,
+    text: "Module 21: Spring Boot and Database Integration",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 21.1: Introduction to Database Integration",
+  },
+  {
+    type: "point",
+    text: "Database integration in Spring Boot simplifies interaction with relational and non-relational databases. Spring Boot's auto-configuration and abstraction layers like JPA reduce boilerplate code.",
+  },
+  {
+    type: "example",
+    code: `// Example: Adding Database Dependencies in pom.xml
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-data-jpa</artifactId>
+</dependency>
+<dependency>
+  <groupId>com.h2database</groupId>
+  <artifactId>h2</artifactId>
+  <scope>runtime</scope>
+</dependency>`,
+  },
+  {
+    type: "point",
+    text: "Spring Boot supports common databases like MySQL, PostgreSQL, H2, and MongoDB. Use the correct dependencies for the database you plan to integrate.",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 21.2: Configuring a DataSource",
+  },
+  {
+    type: "point",
+    text: "A DataSource is a factory for connections to a physical database. Spring Boot can configure it automatically, or you can configure it explicitly in `application.properties` or `application.yml`.",
+  },
+  {
+    type: "example",
+    code: `// Example: application.properties for H2 Database
+spring.datasource.url=jdbc:h2:mem:testdb
+spring.datasource.driver-class-name=org.h2.Driver
+spring.datasource.username=sa
+spring.datasource.password=
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true`,
+  },
+  {
+    type: "point",
+    text: "For production databases like MySQL or PostgreSQL, replace H2 configurations with the appropriate database URL, username, and password.",
+  },
+  {
+    type: "example",
+    code: `// Example: application.properties for MySQL
+spring.datasource.url=jdbc:mysql://localhost:3306/mydb
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.datasource.username=root
+spring.datasource.password=password`,
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 21.3: Using JPA and Hibernate",
+  },
+  {
+    type: "point",
+    text: "JPA (Java Persistence API) is a specification for ORM (Object-Relational Mapping). Hibernate is one of its most widely used implementations.",
+  },
+  {
+    type: "example",
+    code: `// Example: Annotating an Entity Class
+@Entity
+@Table(name = "users") // Optional: Maps the class to a specific table
+public class User {
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-generate primary key
+  private Long id;
+
+  @Column(nullable = false) // Map fields to specific columns
+  private String name;
+
+  @Column(unique = true)
+  private String email;
+
+  // Constructors, Getters, and Setters
+}`,
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 21.4: Creating Repositories",
+  },
+  {
+    type: "point",
+    text: "Spring Data JPA provides pre-built repository interfaces like `JpaRepository` and `CrudRepository` that abstract common operations like saving, finding, and deleting records.",
+  },
+  {
+    type: "example",
+    code: `// Example: Creating a User Repository
+@Repository
+public interface UserRepository extends JpaRepository<User, Long> {
+
+  // Custom Query Method: Find users by name
+  List<User> findByName(String name);
+
+  // Custom Query Method: Find by email
+  Optional<User> findByEmail(String email);
+}`,
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 21.5: Database Initialization with Spring Boot",
+  },
+  {
+    type: "point",
+    text: "Spring Boot can initialize your database schema and data using SQL scripts or JPA schema generation. Place these scripts in the `resources` folder.",
+  },
+  {
+    type: "example",
+    code: `// Example: application.properties for Database Initialization
+spring.sql.init.mode=always
+spring.sql.init.schema-locations=classpath:schema.sql
+spring.sql.init.data-locations=classpath:data.sql
+
+// schema.sql
+CREATE TABLE users (
+  id BIGINT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  email VARCHAR(255) UNIQUE NOT NULL
+);
+
+// data.sql
+INSERT INTO users (name, email) VALUES ('John Doe', 'john.doe@example.com');
+INSERT INTO users (name, email) VALUES ('Jane Smith', 'jane.smith@example.com');`,
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 21.6: Using Spring JDBC",
+  },
+  {
+    type: "point",
+    text: "Spring JDBC provides `JdbcTemplate` for executing SQL queries and mapping results. It is faster and less resource-intensive than ORM solutions like Hibernate.",
+  },
+  {
+    type: "example",
+    code: `// Example: Using JdbcTemplate to Query Users
+@Autowired
+private JdbcTemplate jdbcTemplate;
+
+public List<User> findAllUsers() {
+  String sql = "SELECT * FROM users";
+  return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(User.class));
+}`,
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 21.7: Transaction Management",
+  },
+  {
+    type: "point",
+    text: "Spring provides seamless transaction management with the `@Transactional` annotation. It ensures that a block of code runs within a transaction boundary.",
+  },
+  {
+    type: "example",
+    code: `// Example: Transactional Service
+@Service
+public class UserService {
+
+  @Autowired
+  private UserRepository userRepository;
+
+  @Transactional
+  public void updateUserEmail(Long userId, String newEmail) {
+    User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+    user.setEmail(newEmail);
+    userRepository.save(user);
+  }
+}`,
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 21.8: Testing Database Integration",
+  },
+  {
+    type: "point",
+    text: "Spring Boot supports testing with in-memory databases like H2 or external tools like Testcontainers. These environments isolate tests from the production database.",
+  },
+  {
+    type: "example",
+    code: `// Example: Testing User Repository with H2 Database
+@SpringBootTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
+public class UserRepositoryTest {
+
+  @Autowired
+  private UserRepository userRepository;
+
+  @Test
+  public void testFindByEmail() {
+    Optional<User> user = userRepository.findByEmail("john.doe@example.com");
+    Assertions.assertTrue(user.isPresent());
+    Assertions.assertEquals("John Doe", user.get().getName());
+  }
+}`,
+  },
+],
+
+module22: [
+  {
+    type: "margin",
+  },
+  {
+    type: "header",
+    level: 2,
+    text: "Module 22: Spring Boot Security Basics",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 22.1: Introduction to Spring Security",
+  },
+  {
+    type: "point",
+    text: "Spring Security is a powerful and customizable authentication and access control framework for Java applications. It integrates seamlessly with Spring Boot to handle security aspects like authentication, authorization, and CSRF protection.",
+  },
+  {
+    type: "example",
+    code: `// Example: Adding Spring Security dependency in pom.xml
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-security</artifactId>
+</dependency>`,
+  },
+  {
+    type: "point",
+    text: "Spring Security provides built-in mechanisms for securing REST APIs, form-based login, and securing methods through annotations like `@PreAuthorize`.",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 22.2: Basic Authentication with Spring Security",
+  },
+  {
+    type: "point",
+    text: "Basic Authentication is one of the simplest forms of authentication in Spring Security, where the client sends a username and password with each request.",
+  },
+  {
+    type: "example",
+    code: `// Example: Configuring Basic Authentication in Spring Security
+@Configuration
+@EnableWebSecurity
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+  @Override
+  protected void configure(HttpSecurity http) throws Exception {
+    http
+      .authorizeRequests()
+        .antMatchers("/public/**").permitAll() // Allowing public paths without authentication
+        .anyRequest().authenticated() // All other requests require authentication
+      .and()
+      .httpBasic(); // Enable HTTP Basic Authentication
+  }
+
+  @Override
+  protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    auth.inMemoryAuthentication()
+      .withUser("user")
+      .password("{noop}password") // No encoding for simplicity (use BCrypt in production)
+      .roles("USER");
+  }
+}`,
+  },
+  {
+    type: "point",
+    text: "In this configuration, we enable Basic Authentication and configure a user with the username `user` and password `password` for testing purposes. `{noop}` is used to specify no password encoder (this is insecure for production).",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 22.3: Form-Based Authentication",
+  },
+  {
+    type: "point",
+    text: "Spring Security also supports form-based authentication. This allows the user to submit their username and password through an HTML form, and Spring Security will handle the authentication process.",
+  },
+  {
+    type: "example",
+    code: `// Example: Configuring Form-Based Authentication in Spring Security
+@Configuration
+@EnableWebSecurity
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+  @Override
+  protected void configure(HttpSecurity http) throws Exception {
+    http
+      .authorizeRequests()
+        .antMatchers("/login", "/register").permitAll() // Allowing public access to login and register pages
+        .anyRequest().authenticated() // All other requests require authentication
+      .and()
+      .formLogin() // Enabling form-based login
+        .loginPage("/login") // Custom login page URL
+        .permitAll(); // Allowing public access to the login page
+  }
+
+  @Override
+  protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    auth.inMemoryAuthentication()
+      .withUser("user")
+      .password("{noop}password") // No encoding for simplicity
+      .roles("USER");
+  }
+}`,
+  },
+  {
+    type: "point",
+    text: "In this example, we configure a custom login page (`/login`) and allow public access to it. After successful login, users are redirected to the default page or the one they tried to access before login.",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 22.4: Role-Based Authorization",
+  },
+  {
+    type: "point",
+    text: "Role-based access control (RBAC) is a method of restricting access based on user roles. In Spring Security, roles can be defined and used to authorize or restrict access to specific resources.",
+  },
+  {
+    type: "example",
+    code: `// Example: Role-Based Authorization
+@Configuration
+@EnableWebSecurity
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+  @Override
+  protected void configure(HttpSecurity http) throws Exception {
+    http
+      .authorizeRequests()
+        .antMatchers("/admin/**").hasRole("ADMIN") // Only ADMIN role can access /admin paths
+        .antMatchers("/user/**").hasRole("USER") // Only USER role can access /user paths
+        .anyRequest().authenticated() // All other requests require authentication
+      .and()
+      .formLogin();
+  }
+
+  @Override
+  protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    auth.inMemoryAuthentication()
+      .withUser("admin")
+      .password("{noop}adminpassword")
+      .roles("ADMIN")
+      .and()
+      .withUser("user")
+      .password("{noop}userpassword")
+      .roles("USER");
+  }
+}`,
+  },
+  {
+    type: "point",
+    text: "This configuration ensures that only users with the `ADMIN` role can access the `/admin/**` path and users with the `USER` role can access the `/user/**` path.",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 22.5: Protecting REST APIs with JWT",
+  },
+  {
+    type: "point",
+    text: "JSON Web Tokens (JWT) are commonly used to secure REST APIs. Spring Security allows you to integrate JWT for stateless authentication. After successful login, a JWT is issued and must be included in the `Authorization` header of subsequent requests.",
+  },
+  {
+    type: "example",
+    code: `// Example: JWT Authentication Filter
+public class JwtAuthenticationFilter extends OncePerRequestFilter {
+
+  private final JwtTokenProvider jwtTokenProvider;
+
+  public JwtAuthenticationFilter(JwtTokenProvider jwtTokenProvider) {
+    this.jwtTokenProvider = jwtTokenProvider;
+  }
+
+  @Override
+  protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    String token = extractJwtFromRequest(request);
+
+    if (token != null && jwtTokenProvider.validateToken(token)) {
+      Authentication authentication = jwtTokenProvider.getAuthentication(token);
+      SecurityContextHolder.getContext().setAuthentication(authentication);
+    }
+
+    filterChain.doFilter(request, response);
+  }
+
+  private String extractJwtFromRequest(HttpServletRequest request) {
+    String bearerToken = request.getHeader("Authorization");
+    if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
+      return bearerToken.substring(7);
+    }
+    return null;
+  }
+}`,
+  },
+  {
+    type: "point",
+    text: "In this example, a custom `JwtAuthenticationFilter` intercepts each request, extracts the JWT from the `Authorization` header, validates it, and sets the authentication context for the request.",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 22.6: Customizing Authentication and Authorization",
+  },
+  {
+    type: "point",
+    text: "Spring Security provides many ways to customize authentication and authorization logic. You can define custom `UserDetailsService` for loading user-specific data or write custom authorization logic using annotations like `@PreAuthorize`.",
+  },
+  {
+    type: "example",
+    code: `// Example: Custom UserDetailsService Implementation
+@Service
+public class CustomUserDetailsService implements UserDetailsService {
+
+  @Autowired
+  private UserRepository userRepository;
+
+  @Override
+  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    User user = userRepository.findByUsername(username)
+      .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    
+    return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), 
+        AuthorityUtils.createAuthorityList(user.getRole()));
+  }
+}`,
+  },
+  {
+    type: "point",
+    text: "The custom `UserDetailsService` implementation loads user information from a database, maps it to Spring Security's `UserDetails` interface, and provides roles/authorities for authorization.",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 22.7: Securing Method Calls with @PreAuthorize",
+  },
+  {
+    type: "point",
+    text: "Spring Security provides method-level security with annotations like `@PreAuthorize`. This allows you to restrict access to specific methods based on roles or permissions.",
+  },
+  {
+    type: "example",
+    code: `// Example: Using @PreAuthorize for Method-Level Security
+@PreAuthorize("hasRole('ADMIN')")
+public void deleteUser(Long userId) {
+  // Only users with the ADMIN role can delete users
+  userRepository.deleteById(userId);
+}`,
+  },
+  {
+    type: "point",
+    text: "In this example, the method `deleteUser` is protected by the `@PreAuthorize` annotation, ensuring that only users with the `ADMIN` role can call it.",
+  },
+],
+
+module23: [
+  {
+    type: "margin",
+  },
+  {
+    type: "header",
+    level: 2,
+    text: "Module 23: Building Microservices with Spring Boot",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 23.1: Introduction to Microservices Architecture",
+  },
+  {
+    type: "point",
+    text: "Microservices is an architectural style where an application is composed of small, independently deployable services that communicate with each other over well-defined APIs. These services are loosely coupled and can be developed, deployed, and scaled independently.",
+  },
+  {
+    type: "point",
+    text: "Each microservice focuses on a specific business function and can be written in different languages, use different databases, and can be independently scaled.",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 23.2: Setting Up a Spring Boot Microservice",
+  },
+  {
+    type: "point",
+    text: "To set up a Spring Boot microservice, you start with a basic Spring Boot application and configure it to expose RESTful endpoints. Each microservice should have its own isolated functionality.",
+  },
+  {
+    type: "example",
+    code: `// Example: Setting up a simple Spring Boot RESTful microservice
+@SpringBootApplication
+@RestController
+public class ProductServiceApplication {
+
+  public static void main(String[] args) {
+    SpringApplication.run(ProductServiceApplication.class, args);
+  }
+
+  @GetMapping("/products")
+  public List<Product> getAllProducts() {
+    return Arrays.asList(new Product("Laptop", 1000), new Product("Smartphone", 800));
+  }
+}
+
+// Product class
+public class Product {
+  private String name;
+  private int price;
+
+  // Constructor, getters and setters
+  public Product(String name, int price) {
+    this.name = name;
+    this.price = price;
+  }
+  
+  public String getName() { return name; }
+  public int getPrice() { return price; }
+}`,
+  },
+  {
+    type: "point",
+    text: "In this example, we create a simple Spring Boot microservice that exposes a `/products` endpoint. When a GET request is sent to this endpoint, it returns a list of products.",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 23.3: Service Discovery with Eureka",
+  },
+  {
+    type: "point",
+    text: "Service Discovery is an important aspect of microservices architecture. Eureka, a service discovery tool by Netflix, is commonly used with Spring Cloud to enable services to discover each other dynamically at runtime.",
+  },
+  {
+    type: "example",
+    code: `// Example: Adding Eureka Server to the Application
+@SpringBootApplication
+@EnableEurekaServer
+public class EurekaServerApplication {
+
+  public static void main(String[] args) {
+    SpringApplication.run(EurekaServerApplication.class, args);
+  }
+}
+
+// Eureka Client configuration in the microservice
+@SpringBootApplication
+@EnableEurekaClient
+public class ProductServiceApplication {
+
+  public static void main(String[] args) {
+    SpringApplication.run(ProductServiceApplication.class, args);
+  }
+}`,
+  },
+  {
+    type: "point",
+    text: "In the example above, we have set up an Eureka Server with `@EnableEurekaServer` and a microservice with `@EnableEurekaClient` to register itself with the Eureka server.",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 23.4: Communication Between Microservices with RestTemplate",
+  },
+  {
+    type: "point",
+    text: "Microservices often need to communicate with each other. `RestTemplate` is a Spring class used to perform HTTP requests to other services. We can use it to call other microservices from within our service.",
+  },
+  {
+    type: "example",
+    code: `// Example: Using RestTemplate to call another microservice
+@Configuration
+public class RestTemplateConfig {
+
+  @Bean
+  public RestTemplate restTemplate() {
+    return new RestTemplate();
+  }
+}
+
+@RestController
+public class OrderService {
+
+  @Autowired
+  private RestTemplate restTemplate;
+
+  @GetMapping("/order")
+  public String placeOrder() {
+    String productDetails = restTemplate.getForObject("http://product-service/products", String.class);
+    return "Order placed for: " + productDetails;
+  }
+}`,
+  },
+  {
+    type: "point",
+    text: "In this example, the `OrderService` microservice uses `RestTemplate` to fetch product details from the `ProductService` microservice. The `@GetMapping` method makes an HTTP GET request to another service's endpoint.",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 23.5: API Gateway with Spring Cloud Gateway",
+  },
+  {
+    type: "point",
+    text: "An API Gateway acts as an entry point for all microservices. It handles routing, load balancing, and security. Spring Cloud Gateway provides a simple and powerful way to route requests to microservices.",
+  },
+  {
+    type: "example",
+    code: `// Example: Setting up Spring Cloud Gateway
+@SpringBootApplication
+@EnableGateway
+public class ApiGatewayApplication {
+
+  public static void main(String[] args) {
+    SpringApplication.run(ApiGatewayApplication.class, args);
+  }
+
+  @Bean
+  public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
+    return builder.routes()
+      .route(r -> r.path("/product/**")
+        .uri("lb://PRODUCT-SERVICE") // Load-balanced route to product service
+        .id("productModule"))
+      .build();
+  }
+}`,
+  },
+  {
+    type: "point",
+    text: "In the example, we configure Spring Cloud Gateway to route requests to `/product/**` to the `PRODUCT-SERVICE` microservice using service discovery. The `lb://` prefix indicates that the service is load-balanced and registered in Eureka.",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 23.6: Externalized Configuration with Spring Cloud Config",
+  },
+  {
+    type: "point",
+    text: "Spring Cloud Config provides server and client-side support for externalized configuration in a microservices architecture. It allows services to retrieve their configuration from a central configuration server.",
+  },
+  {
+    type: "example",
+    code: `// Example: Config Server Setup
+@SpringBootApplication
+@EnableConfigServer
+public class ConfigServerApplication {
+
+  public static void main(String[] args) {
+    SpringApplication.run(ConfigServerApplication.class, args);
+  }
+}
+
+// Application config client setup
+@Configuration
+@EnableConfigClient
+public class ConfigClientApplication {
+
+  public static void main(String[] args) {
+    SpringApplication.run(ConfigClientApplication.class, args);
+  }
+}`,
+  },
+  {
+    type: "point",
+    text: "Here, `ConfigServerApplication` acts as a configuration server, and the client applications use `@EnableConfigClient` to retrieve configuration from the server.",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 23.7: Resilience with Spring Cloud Circuit Breaker",
+  },
+  {
+    type: "point",
+    text: "Resilience in microservices can be achieved using tools like circuit breakers. Spring Cloud Circuit Breaker integrates with libraries such as Resilience4j or Hystrix to handle service failures gracefully.",
+  },
+  {
+    type: "example",
+    code: `// Example: Using Resilience4j Circuit Breaker
+@Bean
+public CircuitBreakerFactory circuitBreakerFactory() {
+  return new Resilience4JCircuitBreakerFactory();
+}
+
+public String callProductService() {
+  CircuitBreaker circuitBreaker = circuitBreakerFactory.create("productService");
+  return circuitBreaker.run(() -> restTemplate.getForObject("http://product-service/products", String.class), 
+                            throwable -> "Product service is unavailable");
+}`,
+  },
+  {
+    type: "point",
+    text: "The `callProductService` method demonstrates how to wrap a service call with a circuit breaker. If the service is down or fails, a fallback response is returned.",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 23.8: Monitoring and Logging in Microservices",
+  },
+  {
+    type: "point",
+    text: "Monitoring and logging are critical in microservices to track performance, detect failures, and troubleshoot issues. Spring Boot integrates well with tools like Spring Boot Actuator and Sleuth for tracing and monitoring microservices.",
+  },
+  {
+    type: "example",
+    code: `// Example: Enabling Spring Boot Actuator for monitoring
+@SpringBootApplication
+@EnableActuator
+public class MonitoringApplication {
+
+  public static void main(String[] args) {
+    SpringApplication.run(MonitoringApplication.class, args);
+  }
+}
+
+management.endpoints.web.exposure.include=health,info,metrics`,
+  },
+  {
+    type: "point",
+    text: "By including Spring Boot Actuator, we can monitor the health, metrics, and other endpoints of our microservice. The `management.endpoints.web.exposure.include` configuration allows us to expose specific actuator endpoints for monitoring.",
+  },
+],
+
+module24: [
+  {
+    type: "margin",
+  },
+  {
+    type: "header",
+    level: 2,
+    text: "Module 24: Spring Boot Testing and Debugging",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 24.1: Introduction to Spring Boot Testing",
+  },
+  {
+    type: "point",
+    text: "Testing is essential in Spring Boot to ensure the application works as expected. Spring Boot provides various tools to test different layers of the application, such as unit testing, integration testing, and acceptance testing.",
+  },
+  {
+    type: "point",
+    text: "Spring Boot’s testing support is based on JUnit and integrates seamlessly with other testing frameworks like TestNG and Mockito.",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 24.2: Unit Testing with JUnit and Mockito",
+  },
+  {
+    type: "point",
+    text: "Unit testing focuses on testing individual units of functionality in isolation, typically using mock objects to simulate dependencies. Mockito is commonly used for mocking dependencies in Spring Boot applications.",
+  },
+  {
+    type: "example",
+    code: `// Example: Unit Test with JUnit and Mockito
+@RunWith(MockitoJUnitRunner.class)
+public class ProductServiceTest {
+
+  @Mock
+  private ProductRepository productRepository;
+
+  @InjectMocks
+  private ProductService productService;
+
+  @Test
+  public void testGetProductById() {
+    Product product = new Product(1L, "Laptop", 1000);
+    Mockito.when(productRepository.findById(1L)).thenReturn(Optional.of(product));
+
+    Product result = productService.getProductById(1L);
+    
+    assertNotNull(result);
+    assertEquals("Laptop", result.getName());
+  }
+}`,
+  },
+  {
+    type: "point",
+    text: "In this example, we mock the `ProductRepository` dependency and inject it into the `ProductService`. The `@Test` annotation marks a method as a test, and `Mockito.when()` is used to simulate the repository's behavior.",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 24.3: Integration Testing with @SpringBootTest",
+  },
+  {
+    type: "point",
+    text: "Integration testing involves testing the interaction between different layers or components of the application. Spring Boot makes integration testing easy with the `@SpringBootTest` annotation.",
+  },
+  {
+    type: "example",
+    code: `// Example: Integration Test with @SpringBootTest
+@SpringBootTest
+public class ProductControllerTest {
+
+  @Autowired
+  private ProductController productController;
+
+  @Autowired
+  private MockMvc mockMvc;
+
+  @Test
+  public void testGetProducts() throws Exception {
+    mockMvc.perform(get("/products"))
+           .andExpect(status().isOk())
+           .andExpect(jsonPath("$[0].name").value("Laptop"));
+  }
+}`,
+  },
+  {
+    type: "point",
+    text: "The `@SpringBootTest` annotation tells Spring to load the full application context for testing. The `MockMvc` object is used to perform HTTP requests and assert the results, like checking the response status and content.",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 24.4: Testing with @DataJpaTest for JPA Repositories",
+  },
+  {
+    type: "point",
+    text: "When testing Spring Data JPA repositories, you can use the `@DataJpaTest` annotation. It configures an embedded database and performs tests related to JPA repositories without starting the whole application context.",
+  },
+  {
+    type: "example",
+    code: `// Example: Repository Test with @DataJpaTest
+@DataJpaTest
+public class ProductRepositoryTest {
+
+  @Autowired
+  private ProductRepository productRepository;
+
+  @Test
+  public void testFindByName() {
+    Product product = new Product("Laptop", 1000);
+    productRepository.save(product);
+
+    Product result = productRepository.findByName("Laptop");
+    
+    assertNotNull(result);
+    assertEquals("Laptop", result.getName());
+  }
+}`,
+  },
+  {
+    type: "point",
+    text: "In this example, we use `@DataJpaTest` to test the repository layer, focusing on JPA functionality. The embedded database is used for saving and querying the `Product` entity.",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 24.5: Testing Service Layer with MockBeans",
+  },
+  {
+    type: "point",
+    text: "In integration tests, sometimes you need to mock a service layer bean to isolate the test. You can use `@MockBean` to mock beans within the application context.",
+  },
+  {
+    type: "example",
+    code: `// Example: Mocking Service Layer Bean
+@SpringBootTest
+public class OrderServiceTest {
+
+  @Autowired
+  private OrderService orderService;
+
+  @MockBean
+  private ProductService productService;
+
+  @Test
+  public void testPlaceOrder() {
+    Product product = new Product(1L, "Laptop", 1000);
+    Mockito.when(productService.getProductById(1L)).thenReturn(product);
+
+    String result = orderService.placeOrder(1L);
+    
+    assertEquals("Order placed for: Laptop", result);
+  }
+}`,
+  },
+  {
+    type: "point",
+    text: "In this example, the `ProductService` is mocked using `@MockBean`. The `orderService` method can then use the mocked service in the test, ensuring the unit is isolated.",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 24.6: Debugging Spring Boot Applications",
+  },
+  {
+    type: "point",
+    text: "Debugging Spring Boot applications involves using standard debugging tools like breakpoints, logging, and debugging the application context. Spring Boot also has built-in features for tracing issues.",
+  },
+  {
+    type: "point",
+    text: "Common ways to debug Spring Boot applications include:",
+  },
+  {
+    type: "list",
+    list: [
+      "Using `@Slf4j` or `Logger` for logging messages",
+      "Setting breakpoints in the IDE and running the application in debug mode",
+      "Using Spring Boot's `actuator` endpoints to monitor the application health and metrics",
+      "Enabling debug-level logging by setting `logging.level.root=DEBUG` in `application.properties`"
+    ],
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 24.7: Using Spring Boot Actuator for Monitoring and Debugging",
+  },
+  {
+    type: "point",
+    text: "Spring Boot Actuator provides several built-in endpoints to help with debugging, including `/health`, `/info`, and `/metrics`. These can give insights into the status of the application and performance.",
+  },
+  {
+    type: "example",
+    code: `// Example: Enabling Spring Boot Actuator
+@SpringBootApplication
+@EnableActuator
+public class DebugApplication {
+
+  public static void main(String[] args) {
+    SpringApplication.run(DebugApplication.class, args);
+  }
+}
+
+// application.properties
+management.endpoints.web.exposure.include=health,info,metrics`,
+  },
+  {
+    type: "point",
+    text: "In this example, we enable Spring Boot Actuator and configure it to expose the health, info, and metrics endpoints. These endpoints can be used for debugging and monitoring the application.",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 24.8: Test Coverage and Quality with Jacoco",
+  },
+  {
+    type: "point",
+    text: "Jacoco is a popular tool used to measure code coverage in Java projects. Integrating Jacoco with Spring Boot allows you to analyze test coverage and improve the quality of your tests.",
+  },
+  {
+    type: "example",
+    code: `// Example: Integrating Jacoco in Maven
+<plugin>
+  <groupId>org.jacoco</groupId>
+  <artifactId>jacoco-maven-plugin</artifactId>
+  <version>0.8.7</version>
+  <executions>
+    <execution>
+      <goals>
+        <goal>prepare-agent</goal>
+      </goals>
+    </execution>
+  </executions>
+</plugin>`,
+  },
+  {
+    type: "point",
+    text: "In this example, we configure Jacoco in the `pom.xml` to collect code coverage data during the test phase. This helps you monitor the effectiveness of your tests and ensures your application is thoroughly tested.",
+  },
+],
+
+module25: [
+  {
+    type: "margin",
+  },
+  {
+    type: "header",
+    level: 2,
+    text: "Module 25: Spring Boot and Thymeleaf",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 25.1: Introduction to Thymeleaf in Spring Boot",
+  },
+  {
+    type: "point",
+    text: "Thymeleaf is a modern server-side Java template engine for web and standalone environments. It is well-suited for use with Spring Boot for rendering dynamic web pages.",
+  },
+  {
+    type: "point",
+    text: "Thymeleaf integrates well with Spring Boot and provides a simple way to create dynamic web applications without the complexity of JavaServer Pages (JSP).",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 25.2: Setting Up Thymeleaf in Spring Boot",
+  },
+  {
+    type: "point",
+    text: "Setting up Thymeleaf in Spring Boot is easy, as it is included by default in Spring Boot's web starter. You don’t need to add any additional configuration.",
+  },
+  {
+    type: "example",
+    code: `// pom.xml dependency for Spring Boot and Thymeleaf
+<dependencies>
+  <dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-thymeleaf</artifactId>
+  </dependency>
+  <dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+  </dependency>
+</dependencies>`,
+  },
+  {
+    type: "point",
+    text: "After adding the necessary dependencies, Thymeleaf templates should be placed in the `src/main/resources/templates` directory, and static resources like CSS and JavaScript in `src/main/resources/static`.",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 25.3: Thymeleaf Template Syntax",
+  },
+  {
+    type: "point",
+    text: "Thymeleaf uses a simple and intuitive syntax. Most Thymeleaf expressions are wrapped in `${}` to indicate variables or expressions.",
+  },
+  {
+    type: "example",
+    code: `<!-- Example: Thymeleaf Template -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Product List</title>
+</head>
+<body>
+  <h1>Product List</h1>
+  <ul>
+    <li th:each="product : $ {products}" th:text="$ {product.name}">Product Name</li>
+  </ul>
+</body>
+</html>`,
+  },
+  {
+    type: "point",
+    text: "In the example above, the `th:each` attribute is used to loop through a list of products. The `${product.name}` expression will dynamically display the name of each product in the list.",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 25.4: Integrating Thymeleaf with Spring Boot Controllers",
+  },
+  {
+    type: "point",
+    text: "Thymeleaf templates are rendered by controllers in Spring Boot. A controller method can return a `String`, which corresponds to the name of the Thymeleaf template to render.",
+  },
+  {
+    type: "example",
+    code: `// Example: Spring Boot Controller
+@Controller
+public class ProductController {
+
+  @Autowired
+  private ProductService productService;
+
+  @GetMapping("/products")
+  public String getProducts(Model model) {
+    List<Product> products = productService.getAllProducts();
+    model.addAttribute("products", products);
+    return "productList";  // This corresponds to the productList.html template
+  }
+}`,
+  },
+  {
+    type: "point",
+    text: "In this example, the `Model` is used to pass the list of products from the controller to the Thymeleaf template. The template name is `productList`, and it will be resolved to `productList.html` in the `templates` folder.",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 25.5: Thymeleaf Expressions and Variables",
+  },
+  {
+    type: "point",
+    text: "Thymeleaf expressions allow you to output variables, conditionally render elements, and perform simple operations.",
+  },
+  {
+    type: "example",
+    code: `<!-- Example: Thymeleaf Expressions -->
+<p th:text="'Hello, ' + $ {username}">Hello, user</p>
+<p th:if="$ {user != null}" th:text="'Welcome ' + $ {user.name}">Welcome</p>`,
+  },
+  {
+    type: "point",
+    text: "In the example, `${username}` is rendered directly, while `th:if` is used to conditionally display a message if the `user` object is not null. Thymeleaf supports logical conditions and string concatenation.",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 25.6: Thymeleaf Layouts and Fragments",
+  },
+  {
+    type: "point",
+    text: "Thymeleaf allows you to create reusable layouts and fragments to avoid code duplication. A fragment is a snippet of HTML that can be reused across multiple templates.",
+  },
+  {
+    type: "example",
+    code: `<!-- Example: Layout with Fragments -->
+<!-- header.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>My Application</title>
+</head>
+<body>
+  <div th:fragment="header">
+    <h1>Welcome to My Application</h1>
+  </div>
+</body>
+</html>`,
+  },
+  {
+    type: "point",
+    text: "In the example, the `header.html` template defines a fragment named `header`. You can include this fragment in other templates using the `th:replace` or `th:include` attributes.",
+  },
+  {
+    type: "example",
+    code: `<!-- Example: Using Fragment -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Product List</title>
+</head>
+<body>
+  <div th:replace="~{header}"></div>
+  <h2>Product List</h2>
+  <ul>
+    <li th:each="product : $ {products}" th:text="$ {product.name}">Product Name</li>
+  </ul>
+</body>
+</html>`,
+  },
+  {
+    type: "point",
+    text: "Here, the `th:replace` attribute is used to include the `header` fragment from the `header.html` template. This allows for modular code and easy reuse of common components like headers, footers, etc.",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 25.7: Form Handling with Thymeleaf",
+  },
+  {
+    type: "point",
+    text: "Thymeleaf integrates seamlessly with Spring Boot for form handling. You can bind form fields to model attributes and process them easily in the controller.",
+  },
+  {
+    type: "example",
+    code: `<!-- Example: Thymeleaf Form -->
+<form action="#" th:action="@{/products}" th:object="$ {product}" method="post">
+  <label for="name">Product Name:</label>
+  <input type="text" th:field="*{name}" />
+  <label for="price">Product Price:</label>
+  <input type="text" th:field="*{price}" />
+  <button type="submit">Submit</button>
+</form>`,
+  },
+  {
+    type: "point",
+    text: "In this form, the `th:action` attribute binds the form submission to a Spring controller endpoint, while `th:field` binds the form fields to the corresponding properties in the `product` model object.",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 25.8: Error Handling with Thymeleaf",
+  },
+  {
+    type: "point",
+    text: "Thymeleaf also supports error handling in forms. You can display error messages for form fields by checking for validation errors in the model.",
+  },
+  {
+    type: "example",
+    code: `<!-- Example: Error Handling in Thymeleaf -->
+<form action="#" th:action="@{/products}" th:object="$ {product}" method="post">
+  <label for="name">Product Name:</label>
+  <input type="text" th:field="*{name}" />
+  <span th:if="$ {#fields.hasErrors('name')}" th:errors="*{name}"></span>
+  <button type="submit">Submit</button>
+</form>`,
+  },
+  {
+    type: "point",
+    text: "In this example, the `th:if` condition checks if there are validation errors for the `name` field, and `th:errors` displays the error message for that field.",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 25.9: Internationalization (i18n) in Thymeleaf",
+  },
+  {
+    type: "point",
+    text: "Thymeleaf supports internationalization (i18n) by enabling language-specific messages through message bundles.",
+  },
+  {
+    type: "example",
+    code: `<!-- Example: Messages in Thymeleaf -->
+<p th:text="#{product.name}">Product Name</p>`,
+  },
+  {
+    type: "point",
+    text: "In this example, the `#{product.name}` expression will look for the `product.name` key in the message properties files, allowing the template to be displayed in different languages based on the configured locale.",
+  },
+],
+
+module26: [
+  {
+    type: "margin",
+  },
+  {
+    type: "header",
+    level: 2,
+    text: "Module 26: Working with Spring Boot Actuator",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 26.1: Introduction to Spring Boot Actuator",
+  },
+  {
+    type: "point",
+    text: "Spring Boot Actuator is a powerful tool that provides production-ready features like monitoring, health checks, and metrics for Spring Boot applications.",
+  },
+  {
+    type: "point",
+    text: "It allows you to gain insights into your application’s health, environment, and performance without the need for additional tools or setup.",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 26.2: Setting Up Spring Boot Actuator",
+  },
+  {
+    type: "point",
+    text: "To enable Spring Boot Actuator, add the `spring-boot-starter-actuator` dependency in your `pom.xml` or `build.gradle` file.",
+  },
+  {
+    type: "example",
+    code: `<!-- pom.xml Dependency for Spring Boot Actuator -->
+<dependencies>
+  <dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-actuator</artifactId>
+  </dependency>
+</dependencies>`,
+  },
+  {
+    type: "point",
+    text: "Once added, Spring Boot Actuator exposes various endpoints for health, metrics, environment details, and more.",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 26.3: Actuator Endpoints Overview",
+  },
+  {
+    type: "point",
+    text: "Spring Boot Actuator provides several built-in endpoints to monitor and manage your application. Common endpoints include `/actuator/health`, `/actuator/metrics`, `/actuator/env`, and `/actuator/beans`.",
+  },
+  {
+    type: "point",
+    text: "You can view the health status of your application, metrics related to performance, and configuration properties through these endpoints.",
+  },
+  {
+    type: "example",
+    code: `# Example: Actuator Endpoint Configuration in application.properties
+management.endpoints.web.exposure.include=health,metrics,env`,
+  },
+  {
+    type: "point",
+    text: "In this example, the `application.properties` configuration ensures that only the `health`, `metrics`, and `env` endpoints are exposed. By default, some endpoints are disabled for security reasons.",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 26.4: Health Check Endpoint",
+  },
+  {
+    type: "point",
+    text: "The `/actuator/health` endpoint provides information about the health of your application, including database connection status, disk space, and custom health indicators.",
+  },
+  {
+    type: "example",
+    code: `<!-- Example: Health Check Response -->
+$ curl http://localhost:8080/actuator/health
+{
+  "status": "UP",
+  "components": {
+    "diskSpace": {
+      "status": "UP",
+      "details": {
+        "total": 1024,
+        "free": 512,
+        "threshold": 10485760
+      }
+    },
+    "db": {
+      "status": "UP"
+    }
+  }
+}`,
+  },
+  {
+    type: "point",
+    text: "The health check will return a JSON response, indicating the overall health status (`UP`, `DOWN`, etc.), and detailed status for components like the database or disk space.",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 26.5: Custom Health Checks",
+  },
+  {
+    type: "point",
+    text: "Spring Boot Actuator allows you to define custom health indicators if you want to monitor specific application components.",
+  },
+  {
+    type: "example",
+    code: `// Example: Custom Health Indicator
+@Component
+public class CustomHealthIndicator extends AbstractHealthIndicator {
+
+    @Override
+    protected void doHealthCheck(Health.Builder builder) throws Exception {
+        // Custom health check logic
+        builder.up().withDetail("CustomCheck", "Everything is fine");
+    }
+}`,
+  },
+  {
+    type: "point",
+    text: "In this example, the `CustomHealthIndicator` class extends `AbstractHealthIndicator` and provides custom logic to determine the health of the application. You can add custom checks for components like external services, queues, etc.",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 26.6: Metrics Endpoint",
+  },
+  {
+    type: "point",
+    text: "The `/actuator/metrics` endpoint provides various metrics, such as JVM memory usage, HTTP request counts, garbage collection statistics, and more.",
+  },
+  {
+    type: "example",
+    code: `# Example: Metrics Endpoint
+$ curl http://localhost:8080/actuator/metrics
+{
+  "mem": {
+    "used": 123456,
+    "free": 654321,
+    "max": 987654
+  },
+  "http.server.requests": {
+    "count": 125,
+    "averageResponseTime": 200
+  }
+}`,
+  },
+  {
+    type: "point",
+    text: "The metrics endpoint returns a JSON response that includes system-related metrics like memory usage, request statistics, and more.",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 26.7: Exposing Additional Endpoints",
+  },
+  {
+    type: "point",
+    text: "You can expose more actuator endpoints by modifying the `application.properties` file to include additional endpoints like `/actuator/logfile`, `/actuator/heapdump`, and `/actuator/threaddump`.",
+  },
+  {
+    type: "example",
+    code: `# Example: Exposing Additional Actuator Endpoints
+management.endpoints.web.exposure.include=health,metrics,env,logfile,heapdump,threaddump`,
+  },
+  {
+    type: "point",
+    text: "This configuration will expose the log file, heap dump, and thread dump endpoints, providing deeper insights into the application’s status and performance.",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 26.8: Securing Actuator Endpoints",
+  },
+  {
+    type: "point",
+    text: "Actuator endpoints often contain sensitive information, so securing them is important. Spring Boot supports security for actuator endpoints via HTTP basic authentication or other security mechanisms.",
+  },
+  {
+    type: "example",
+    code: `# Example: Securing Actuator Endpoints in application.properties
+management.endpoints.web.exposure.include=health,metrics
+management.endpoints.web.exposure.exclude=beans
+spring.security.user.name=admin
+spring.security.user.password=admin`,
+  },
+  {
+    type: "point",
+    text: "In this example, basic authentication is enabled for the actuator endpoints. Only users with the specified username and password can access the endpoints.",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 26.9: Logfile and Log Management",
+  },
+  {
+    type: "point",
+    text: "The `/actuator/logfile` endpoint provides access to the application’s log file, which can be useful for debugging or monitoring the application in production.",
+  },
+  {
+    type: "example",
+    code: `# Example: Logfile Endpoint Access
+$ curl http://localhost:8080/actuator/logfile
+2024-12-28 12:30:12 INFO  ProductController - Product List Retrieved`,
+  },
+  {
+    type: "point",
+    text: "You can use the `/actuator/logfile` endpoint to read the application's log file. This is especially useful for debugging purposes or for monitoring application logs in production environments.",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 26.10: Monitoring and Alerts with Actuator",
+  },
+  {
+    type: "point",
+    text: "You can use Spring Boot Actuator in combination with monitoring tools like Prometheus, Grafana, or Micrometer to create advanced monitoring and alerting systems.",
+  },
+  {
+    type: "point",
+    text: "Micrometer, a metrics collection library included with Spring Boot, can be integrated with Actuator to expose metrics to external monitoring systems like Prometheus.",
+  },
+  {
+    type: "example",
+    code: `# Example: Prometheus and Micrometer Setup
+<dependency>
+  <groupId>io.micrometer</groupId>
+  <artifactId>micrometer-registry-prometheus</artifactId>
+</dependency>`,
+  },
+  {
+    type: "point",
+    text: "By including the Prometheus registry in your project, you can configure Spring Boot Actuator to expose metrics in a format that Prometheus can scrape and visualize using Grafana.",
+  },
+],
+
+module27: [
+  {
+    type: "margin",
+  },
+  {
+    type: "header",
+    level: 2,
+    text: "Module 27: Deploying Spring Boot Applications",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 27.1: Introduction to Deployment Strategies",
+  },
+  {
+    type: "point",
+    text: "Deploying a Spring Boot application involves various strategies depending on the hosting environment, such as cloud platforms, virtual machines, or containerized environments.",
+  },
+  {
+    type: "point",
+    text: "Spring Boot makes it easy to deploy by packaging your application as a JAR or WAR file that can be executed independently or deployed to a web server like Tomcat or Jetty.",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 27.2: Packaging Spring Boot Application as a JAR or WAR",
+  },
+  {
+    type: "point",
+    text: "Spring Boot supports both executable JAR and WAR files, with JAR being the default format. A JAR file contains everything needed to run your application, including dependencies, embedded servlet containers, and application code.",
+  },
+  {
+    type: "point",
+    text: "To package your Spring Boot application as a JAR or WAR, use Maven or Gradle. The `spring-boot-maven-plugin` simplifies this process.",
+  },
+  {
+    type: "example",
+    code: `<!-- Example: Packaging Spring Boot Application as a JAR in pom.xml -->
+<build>
+  <plugins>
+    <plugin>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-maven-plugin</artifactId>
+    </plugin>
+  </plugins>
+</build>`,
+  },
+  {
+    type: "point",
+    text: "To build the JAR file, run `mvn clean install` in the terminal, and it will generate an executable JAR file that can be executed with `java -jar`.",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 27.3: Deploying on a Virtual Machine (VM)",
+  },
+  {
+    type: "point",
+    text: "A virtual machine can be a cost-effective way to host your Spring Boot application, especially for smaller applications or development environments.",
+  },
+  {
+    type: "point",
+    text: "To deploy on a VM, copy the packaged JAR file to the remote server and run it using `java -jar`.",
+  },
+  {
+    type: "example",
+    code: `# Example: Deploying Spring Boot Application on a VM
+scp target/myapp.jar user@remote-server:/path/to/deploy/
+ssh user@remote-server
+java -jar /path/to/deploy/myapp.jar`,
+  },
+  {
+    type: "point",
+    text: "In this example, the JAR file is copied to a remote VM using `scp`, and then executed using `java -jar` after SSH access to the server.",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 27.4: Deploying to Cloud Platforms",
+  },
+  {
+    type: "point",
+    text: "Spring Boot applications can be deployed to popular cloud platforms such as AWS, Google Cloud, and Heroku. Cloud providers offer managed services like load balancing, scaling, and monitoring.",
+  },
+  {
+    type: "point",
+    text: "To deploy on these platforms, you typically need to create a project, configure your application, and deploy the packaged JAR/WAR file.",
+  },
+  {
+    type: "example",
+    code: `# Example: Deploying to Heroku
+heroku create my-spring-boot-app
+git push heroku master
+heroku open`,
+  },
+  {
+    type: "point",
+    text: "In this example, the Spring Boot application is deployed to Heroku using Git. The application is automatically detected, and Heroku handles the deployment process.",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 27.5: Deploying on Docker Containers",
+  },
+  {
+    type: "point",
+    text: "Docker provides a portable and consistent environment for deploying Spring Boot applications. You can package your Spring Boot application into a Docker container and deploy it on any environment that supports Docker.",
+  },
+  {
+    type: "point",
+    text: "To deploy your Spring Boot app on Docker, create a `Dockerfile` that defines how the application should be built and run in a container.",
+  },
+  {
+    type: "example",
+    code: `# Example: Dockerfile for Spring Boot Application
+FROM openjdk:11-jdk
+VOLUME /tmp
+COPY target/myapp.jar app.jar
+ENTRYPOINT ["java", "-jar", "/app.jar"]`,
+  },
+  {
+    type: "point",
+    text: "Once the `Dockerfile` is created, build the Docker image using the `docker build` command, and run the application in a container using `docker run`.",
+  },
+  {
+    type: "example",
+    code: `# Example: Build and Run Docker Container
+docker build -t my-spring-boot-app .
+docker run -p 8080:8080 my-spring-boot-app`,
+  },
+  {
+    type: "point",
+    text: "This Docker setup ensures that your Spring Boot application can run consistently across different environments by encapsulating it inside a container.",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 27.6: Deploying to Kubernetes",
+  },
+  {
+    type: "point",
+    text: "Kubernetes is an open-source container orchestration platform that automates deployment, scaling, and management of containerized applications.",
+  },
+  {
+    type: "point",
+    text: "To deploy your Spring Boot application to Kubernetes, you need to create Kubernetes manifests such as `deployment.yaml`, `service.yaml`, and other configuration files.",
+  },
+  {
+    type: "example",
+    code: `# Example: Kubernetes Deployment YAML
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-boot-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: spring-boot-app
+  template:
+    metadata:
+      labels:
+        app: spring-boot-app
+    spec:
+      containers:
+        - name: spring-boot-app
+          image: my-spring-boot-app:latest
+          ports:
+            - containerPort: 8080`,
+  },
+  {
+    type: "point",
+    text: "The deployment YAML file defines how the Spring Boot app is deployed on Kubernetes, including replicas and container specifications.",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 27.7: Configuring Application for Production Environments",
+  },
+  {
+    type: "point",
+    text: "Before deploying to production, it’s important to optimize your Spring Boot application for performance, security, and scalability.",
+  },
+  {
+    type: "point",
+    text: "Consider settings like database connection pools, external configuration management, logging configurations, and security configurations.",
+  },
+  {
+    type: "example",
+    code: `# Example: application.properties for Production
+server.port=8080
+spring.datasource.url=jdbc:mysql://localhost:3306/prod_db
+spring.datasource.username=prod_user
+spring.datasource.password=prod_password`,
+  },
+  {
+    type: "point",
+    text: "In this example, production-specific configuration values like database URL and credentials are set in the `application.properties` file to ensure the app runs in the production environment.",
+  },
+  {
+    type: "header",
+    level: 3,
+    text: "Lesson 27.8: Monitoring and Logging in Production",
+  },
+  {
+    type: "point",
+    text: "Once deployed, monitoring and logging are critical to ensure that the application is running smoothly and to troubleshoot issues.",
+  },
+  {
+    type: "point",
+    text: "Spring Boot integrates with popular monitoring and logging tools like Prometheus, Grafana, and ELK stack for centralized logging and application performance monitoring.",
+  },
+  {
+    type: "example",
+    code: `# Example: Enabling Prometheus Metrics
+management.metrics.export.prometheus.enabled=true`,
+  },
+  {
+    type: "point",
+    text: "This configuration enables Prometheus metrics collection for the Spring Boot application, allowing you to integrate with Grafana for visualization and alerting.",
+  },
+],
+
+
   project1:[
     {
       type: 'margin'

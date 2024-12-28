@@ -92,6 +92,24 @@ const Home = () => {
         "module16": false,
       }));
     }
+
+    if (!localStorage.getItem('completedSpringBoot')) {
+      // If it doesn't exist, set it with default values
+      localStorage.setItem('completedModules', JSON.stringify({
+        "module17": false,
+        "module18": false,
+        "module19": false,
+        "module20": false,
+        "module21": false,
+        "module22": false,
+        "module23": false,
+        "module24": false,
+        "module25": false,
+        "module26": false,
+        "module27": false,
+      }));
+    }
+
     if (!localStorage.getItem('completedProjects')) {
       // If it doesn't exist, set it with default values
       localStorage.setItem('completedProjects', JSON.stringify({
@@ -102,12 +120,26 @@ const Home = () => {
         "project5": false,
       }));
     }
+
+    if (!localStorage.getItem('completedAdvancedProjects')) {
+      // If it doesn't exist, set it with default values
+      localStorage.setItem('completedProjects', JSON.stringify({
+        "project6": false,
+        "project7": false,
+        "project8": false,
+        "project9": false,
+        "project10": false,
+      }));
+    }
+
   }, []);
   // localStorage.removeItem('completedProjects')
   // localStorage.removeItem('completedModules')
 
   console.log(localStorage.getItem('completedProjects'))
   console.log(localStorage.getItem('completedModules'))
+  console.log(localStorage.getItem('completedSpringBoot'))
+  console.log(localStorage.getItem('completedAdvancedProjects'))
 
   return (
     <div className="landing-page">

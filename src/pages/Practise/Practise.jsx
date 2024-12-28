@@ -90,7 +90,7 @@ const Practise = () => {
                 </Link>
                 <Link to="/practise/project8/" onClick={scrollToTop}>
                     <div className='module-link'>
-                        <p><strong>Project 8:</strong> Online Exam System</p>
+                        <p><strong>Project 8:</strong> Online Course Management System</p>
                         <p>Start now <FaArrowRight /></p>
                     </div>
                 </Link>
