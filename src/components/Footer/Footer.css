@@ -24,6 +24,7 @@
     align-items: center;
     justify-content: center;
     padding: 0 3rem;
+    border: 5px solid rgb(20, 20, 20);
 }
 
 .footer-section {
